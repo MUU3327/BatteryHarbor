@@ -106,7 +106,7 @@ final class BatteryReaderTests: XCTestCase {
             isPresent: true,
             powerSource: .adapter
         )
-        XCTAssertEqual(snapshot.stateText, "已接电源，未充电")
+        XCTAssertEqual(snapshot.stateText, L10n.text("已接电源，未充电"))
     }
 
     func testPowerBalanceUsesAdapterSystemAndBatteryTelemetry() {
@@ -115,7 +115,7 @@ final class BatteryReaderTests: XCTestCase {
             adapterInputWatts: 31.880,
             systemLoadWatts: 5.417
         )
-        XCTAssertEqual(snapshot.powerBalanceText, "平衡误差 0.00 W")
+        XCTAssertEqual(snapshot.powerBalanceText, L10n.format("平衡误差 %@ W", "0.00"))
     }
 
     func testNativeChargeLimitRequiresMacOS264() {

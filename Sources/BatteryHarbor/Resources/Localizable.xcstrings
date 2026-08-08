@@ -1,0 +1,3568 @@
+{
+  "sourceLanguage" : "zh-Hans",
+  "strings" : {
+    "" : {
+
+    },
+    "%@ %lld%%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@ %lld%%"
+          }
+        }
+      }
+    },
+    "%lld" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld"
+          }
+        }
+      }
+    },
+    "%lld%%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld%%"
+          }
+        }
+      }
+    },
+    "%lld%% 未能应用：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Could not apply %lld%%: %@"
+          }
+        }
+      }
+    },
+    "%lld°C" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld°C"
+          }
+        }
+      }
+    },
+    "1 小时" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "1 Hour"
+          }
+        }
+      }
+    },
+    "4 个动作" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "4 Actions"
+          }
+        }
+      }
+    },
+    "24 小时" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24 Hours"
+          }
+        }
+      }
+    },
+    "24 小时历史已清除" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "24-hour history cleared"
+          }
+        }
+      }
+    },
+    "50 到 100 之间的百分比" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A percentage from 50 to 100"
+          }
+        }
+      }
+    },
+    "50%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "50%"
+          }
+        }
+      }
+    },
+    "100%" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "100%"
+          }
+        }
+      }
+    },
+    "Apple 快捷指令" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Shortcuts"
+          }
+        }
+      }
+    },
+    "AppleSMC" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppleSMC"
+          }
+        }
+      }
+    },
+    "CPU %@%% · 唤醒 %lld" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "CPU %@%% · Wakeups %lld"
+          }
+        }
+      }
+    },
+    "English" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "English"
+          }
+        }
+      }
+    },
+    "Helper 写入已确认，macOS 已显示暂停充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper write confirmed; macOS now shows charging paused"
+          }
+        }
+      }
+    },
+    "Helper 写入已确认，macOS 已显示正在充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper write confirmed; macOS now shows charging"
+          }
+        }
+      }
+    },
+    "Helper 已允许临时充满；高电量时 macOS 可能暂缓补电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper enabled temporary full charge; macOS may delay charging at a high battery level"
+          }
+        }
+      }
+    },
+    "Helper 已允许充电；高电量时 macOS 可能暂缓补电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper enabled charging; macOS may delay charging at a high battery level"
+          }
+        }
+      }
+    },
+    "Helper 已确认暂停；等待 macOS 更新电池状态" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper confirmed the pause; waiting for macOS to update battery status"
+          }
+        }
+      }
+    },
+    "Helper 状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper Status"
+          }
+        }
+      }
+    },
+    "Mac 即将睡眠，电池港已提交暂停充电。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Mac is about to sleep. Battery Harbor requested a charging pause."
+          }
+        }
+      }
+    },
+    "Mac 已唤醒，将按当前充电上限恢复巡航。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Your Mac has woken. Battery Harbor will resume monitoring with the current charge limit."
+          }
+        }
+      }
+    },
+    "Mac 睡眠前暂停充电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause Charging Before Mac Sleeps"
+          }
+        }
+      }
+    },
+    "macOS 26 使用原生 Glass Effect；旧系统自动回退到 Material。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "macOS 26 uses the native Glass Effect; earlier systems fall back to Material."
+          }
+        }
+      }
+    },
+    "一" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon"
+          }
+        }
+      }
+    },
+    "三" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wed"
+          }
+        }
+      }
+    },
+    "上限 %lld%%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limit %lld%%"
+          }
+        }
+      }
+    },
+    "不可用" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unavailable"
+          }
+        }
+      }
+    },
+    "临时充满" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top Up to 100%"
+          }
+        }
+      }
+    },
+    "临时充满中" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Topping Up to 100%"
+          }
+        }
+      }
+    },
+    "临时充满失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporary full charge failed: %@"
+          }
+        }
+      }
+    },
+    "临时充满已启用，macOS 已显示正在充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporary full charge enabled; macOS now shows charging"
+          }
+        }
+      }
+    },
+    "临时充满已启用，结束后恢复 %lld%% 上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top Up to 100%% is active; the %lld%% limit will be restored when it ends"
+          }
+        }
+      }
+    },
+    "临时充满已结束，正在恢复 %lld%% 上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporary full charge ended; restoring the %lld%% limit"
+          }
+        }
+      }
+    },
+    "临时充满已结束，正在恢复原上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporary full charge ended; restoring the previous limit"
+          }
+        }
+      }
+    },
+    "临时恢复充电，后台巡航完成后会恢复原上限。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporarily resume charging; background control restores the original limit afterward."
+          }
+        }
+      }
+    },
+    "临时目标 100%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temporary Target 100%"
+          }
+        }
+      }
+    },
+    "二" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tue"
+          }
+        }
+      }
+    },
+    "五" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fri"
+          }
+        }
+      }
+    },
+    "从零实现的原生 macOS 电池养护工具" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "A native macOS battery care utility built from scratch"
+          }
+        }
+      }
+    },
+    "仪表盘" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dashboard"
+          }
+        }
+      }
+    },
+    "保存" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        }
+      }
+    },
+    "保存并在安全控制可用时应用充电上限。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save and apply the charge limit when safe control is available."
+          }
+        }
+      }
+    },
+    "保持适配器供电，同时暂停或恢复电池充入。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep adapter power connected while pausing or resuming battery charging."
+          }
+        }
+      }
+    },
+    "保持面板打开约 5–10 秒即可看到排行。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keep this panel open for about 5–10 seconds to see the ranking."
+          }
+        }
+      }
+    },
+    "保留范围" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Retention"
+          }
+        }
+      }
+    },
+    "停止" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stop"
+          }
+        }
+      }
+    },
+    "允许电池港发送通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Battery Harbor Notifications"
+          }
+        }
+      }
+    },
+    "充入电池" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To Battery"
+          }
+        }
+      }
+    },
+    "充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging"
+          }
+        }
+      }
+    },
+    "充电上限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charge Limit"
+          }
+        }
+      }
+    },
+    "充电已暂停" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging Paused"
+          }
+        }
+      }
+    },
+    "充电控制失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging control failed: %@"
+          }
+        }
+      }
+    },
+    "充电控制模块" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging Control Helper"
+          }
+        }
+      }
+    },
+    "充电控制键" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging Control Key"
+          }
+        }
+      }
+    },
+    "充电状态变化时通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notify When Charging Status Changes"
+          }
+        }
+      }
+    },
+    "充电管理" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging"
+          }
+        }
+      }
+    },
+    "六" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sat"
+          }
+        }
+      }
+    },
+    "关于" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About"
+          }
+        }
+      }
+    },
+    "兼容性" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Compatibility"
+          }
+        }
+      }
+    },
+    "最后一次充电中，当前 %lld%%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Final charge in progress: %lld%%."
+          }
+        }
+      }
+    },
+    "最近 24 小时" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Latest 24 Hours"
+          }
+        }
+      }
+    },
+    "最近 100 条执行、失败和跳过记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The latest 100 completed, failed, and skipped actions"
+          }
+        }
+      }
+    },
+    "最长剩余 %lld 分钟" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to %lld min remaining"
+          }
+        }
+      }
+    },
+    "最长剩余 %lld 小时 %lld 分" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Up to %lld hr %lld min remaining"
+          }
+        }
+      }
+    },
+    "写入、回读和恢复验证已通过" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Write, read-back, and restore verification passed"
+          }
+        }
+      }
+    },
+    "写入后端已就绪，等待写入后立即恢复的人工确认测试" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The write backend is ready; manual write-and-restore verification is required"
+          }
+        }
+      }
+    },
+    "刷新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Refresh"
+          }
+        }
+      }
+    },
+    "功率" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power"
+          }
+        }
+      }
+    },
+    "动作" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Action"
+          }
+        }
+      }
+    },
+    "协议 / PID" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protocol / PID"
+          }
+        }
+      }
+    },
+    "发送测试通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send Test Notification"
+          }
+        }
+      }
+    },
+    "取消" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        }
+      }
+    },
+    "可在“快捷指令”App 中搜索电池港，查询状态、设置上限、暂停/恢复或临时充满。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search for Battery Harbor in Shortcuts to check status, set a limit, pause or resume charging, or top up to 100%."
+          }
+        }
+      }
+    },
+    "可按星期和时间应用上限、暂停、恢复或临时充满。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply a limit, pause, resume, or top up by weekday and time."
+          }
+        }
+      }
+    },
+    "启动" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Startup"
+          }
+        }
+      }
+    },
+    "周一" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mon"
+          }
+        }
+      }
+    },
+    "周三" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wed"
+          }
+        }
+      }
+    },
+    "周二" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tue"
+          }
+        }
+      }
+    },
+    "周五" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fri"
+          }
+        }
+      }
+    },
+    "周六" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sat"
+          }
+        }
+      }
+    },
+    "周四" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thu"
+          }
+        }
+      }
+    },
+    "周日" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sun"
+          }
+        }
+      }
+    },
+    "四" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Thu"
+          }
+        }
+      }
+    },
+    "基础控制" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control Backend"
+          }
+        }
+      }
+    },
+    "外观" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Appearance"
+          }
+        }
+      }
+    },
+    "安全控制已锁定，当前上限仅保存" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety control is locked; the current limit is saved only"
+          }
+        }
+      }
+    },
+    "安全控制未就绪，本次已跳过" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety control is not ready; this run was skipped"
+          }
+        }
+      }
+    },
+    "安全握手成功" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety handshake succeeded"
+          }
+        }
+      }
+    },
+    "安全握手成功（root）" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety Handshake Succeeded (root)"
+          }
+        }
+      }
+    },
+    "安全自检失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety self-test failed: %@"
+          }
+        }
+      }
+    },
+    "安全锁定" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safety Locked"
+          }
+        }
+      }
+    },
+    "安装控制模块" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Install Helper"
+          }
+        }
+      }
+    },
+    "完整充放电循环已完成，正在恢复原充电上限。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The full charge-discharge cycle is complete. Restoring the original charge limit."
+          }
+        }
+      }
+    },
+    "完整充满、静置、放至 10%，再完整充满。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fully charge, rest, discharge to 10%, then fully charge again."
+          }
+        }
+      }
+    },
+    "实时" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live"
+          }
+        }
+      }
+    },
+    "实时功率" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power"
+          }
+        }
+      }
+    },
+    "实时功率分流" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Power Distribution"
+          }
+        }
+      }
+    },
+    "实时功率流向" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Power Flow"
+          }
+        }
+      }
+    },
+    "实时数据每 2 秒更新" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live data updates every 2 seconds"
+          }
+        }
+      }
+    },
+    "实时电池功率" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Live Battery Power"
+          }
+        }
+      }
+    },
+    "实时电量" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Level"
+          }
+        }
+      }
+    },
+    "容量与健康" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Capacity and Health"
+          }
+        }
+      }
+    },
+    "导出 CSV" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export CSV"
+          }
+        }
+      }
+    },
+    "导出失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export failed: %@"
+          }
+        }
+      }
+    },
+    "导出电池港能耗历史" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Battery Harbor Energy History"
+          }
+        }
+      }
+    },
+    "导出电池港诊断报告" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Battery Harbor Diagnostic Report"
+          }
+        }
+      }
+    },
+    "导出诊断报告" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Export Diagnostic Report"
+          }
+        }
+      }
+    },
+    "尚未安装" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Installed"
+          }
+        }
+      }
+    },
+    "尚未完成硬件确认测试，本次没有修改充电状态。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardware verification is incomplete; charging status was not changed."
+          }
+        }
+      }
+    },
+    "尚未执行" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Run"
+          }
+        }
+      }
+    },
+    "尝试注册控制模块" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Try Registering Helper"
+          }
+        }
+      }
+    },
+    "已保存 %lld%% 上限，但控制模块当前不可用。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved the %lld%% limit, but the helper is currently unavailable."
+          }
+        }
+      }
+    },
+    "已保存 %lld%% 上限；完成硬件确认测试后才能自动执行。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved the %lld%% limit; hardware verification is required before automatic control."
+          }
+        }
+      }
+    },
+    "已保存 %lld%%，但安全控制未就绪，当前不会停止充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Saved %lld%%, but safety control is not ready and charging will not be stopped"
+          }
+        }
+      }
+    },
+    "已停止校准并恢复常规充电策略。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibration stopped and the normal charging policy restored."
+          }
+        }
+      }
+    },
+    "已允许充电；高电量或系统电池管理可能暂缓补电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging is allowed; macOS battery management may delay charging at a high battery level"
+          }
+        }
+      }
+    },
+    "已充满" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fully Charged"
+          }
+        }
+      }
+    },
+    "已写入 %lld%% 上限，等待 macOS 更新电池状态" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wrote the %lld%% limit; waiting for macOS to update battery status"
+          }
+        }
+      }
+    },
+    "已启用" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enabled"
+          }
+        }
+      }
+    },
+    "已启用 · %lld 项" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enabled · %lld items"
+          }
+        }
+      }
+    },
+    "已应用 %lld%% 上限，当前处于 3%% 回差区间" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applied the %lld%% limit; the battery is within the 3%% hysteresis range"
+          }
+        }
+      }
+    },
+    "已应用 %lld%% 上限，系统已停止充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applied the %lld%% limit; the system has stopped charging"
+          }
+        }
+      }
+    },
+    "已应用 %lld%% 上限，系统已恢复充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applied the %lld%% limit; the system has resumed charging"
+          }
+        }
+      }
+    },
+    "已应用 %lld%% 充电上限。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applied a %lld%% charge limit."
+          }
+        }
+      }
+    },
+    "已开始临时充满。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Started topping up to 100%."
+          }
+        }
+      }
+    },
+    "已恢复充电。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging resumed."
+          }
+        }
+      }
+    },
+    "已接电源，未充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connected to Power, Not Charging"
+          }
+        }
+      }
+    },
+    "已暂停充电。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging paused."
+          }
+        }
+      }
+    },
+    "已检测到" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Detected"
+          }
+        }
+      }
+    },
+    "已满电，保持接电并静置 1 小时。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fully charged. Keep the adapter connected and let the battery rest for one hour."
+          }
+        }
+      }
+    },
+    "已达到 100%，即将恢复原上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reached 100%; restoring the previous limit"
+          }
+        }
+      }
+    },
+    "已达到充电上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charge Limit Reached"
+          }
+        }
+      }
+    },
+    "已通过" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Passed"
+          }
+        }
+      }
+    },
+    "已降至 %lld%%，开始最后一次完整充电。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discharged to %lld%%. Starting the final full charge."
+          }
+        }
+      }
+    },
+    "常规上限 %lld%%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regular Limit %lld%%"
+          }
+        }
+      }
+    },
+    "平衡误差 %@ W" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balance error %@ W"
+          }
+        }
+      }
+    },
+    "应用侧仍锁定：需要执行自动写入恢复测试" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "App remains locked: automatic write-and-restore verification is required"
+          }
+        }
+      }
+    },
+    "应用充电上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply Charge Limit"
+          }
+        }
+      }
+    },
+    "应用分项见 App 页" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "See the App tab for per-app details"
+          }
+        }
+      }
+    },
+    "应用失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apply failed: %@"
+          }
+        }
+      }
+    },
+    "开始" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start"
+          }
+        }
+      }
+    },
+    "开始安全自检" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Start Safety Check"
+          }
+        }
+      }
+    },
+    "当前 %@°C，已提交暂停充电。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current temperature: %@°C. A charging pause was requested."
+          }
+        }
+      }
+    },
+    "当前仅保存数值，尚未实际限制充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The value is saved only; charging is not currently limited"
+          }
+        }
+      }
+    },
+    "当前未连接电源适配器" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No power adapter is connected"
+          }
+        }
+      }
+    },
+    "当前满充容量" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Full Charge Capacity"
+          }
+        }
+      }
+    },
+    "当前状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Status"
+          }
+        }
+      }
+    },
+    "当前电量 %lld%%，上限 %lld%%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current charge: %lld%%; limit: %lld%%."
+          }
+        }
+      }
+    },
+    "当前电量 %lld%%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current charge: %lld%%."
+          }
+        }
+      }
+    },
+    "当前耗电 App" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current Energy Use by App"
+          }
+        }
+      }
+    },
+    "循环次数" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cycle Count"
+          }
+        }
+      }
+    },
+    "总输入" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total Input"
+          }
+        }
+      }
+    },
+    "恢复充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resume Charging"
+          }
+        }
+      }
+    },
+    "恢复自检" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Check"
+          }
+        }
+      }
+    },
+    "恢复证据" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Restore Evidence"
+          }
+        }
+      }
+    },
+    "打开登录项设置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Open Login Items Settings"
+          }
+        }
+      }
+    },
+    "执行失败：%@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Failed: %@"
+          }
+        }
+      }
+    },
+    "执行成功" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Succeeded"
+          }
+        }
+      }
+    },
+    "执行成功 · %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Succeeded · %@"
+          }
+        }
+      }
+    },
+    "执行时间" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Run Time"
+          }
+        }
+      }
+    },
+    "技术预览版" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Technology Preview"
+          }
+        }
+      }
+    },
+    "报告包含机型、电池快照、Helper 状态和最近计划结果，不包含电池序列号或 Apple ID。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The report includes the Mac model, battery snapshot, helper status, and recent schedule results. It excludes the battery serial number and Apple ID."
+          }
+        }
+      }
+    },
+    "拖动标记调整充电上限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drag the marker to adjust the charge limit"
+          }
+        }
+      }
+    },
+    "按最近 5 秒的公开进程能耗数据估算" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimated from public process energy data over the latest 5 seconds"
+          }
+        }
+      }
+    },
+    "按时间、接通电源和电量触发养护动作" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trigger battery care actions by time, power connection, and battery level"
+          }
+        }
+      }
+    },
+    "排行聚合同一 App 的辅助进程；历史数据保存在本机，数值用于相对比较。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The ranking groups helper processes from the same app. History stays on this Mac and values are intended for relative comparison."
+          }
+        }
+      }
+    },
+    "控制已就绪，拖动后会实际应用到电池" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control is ready; dragging the slider will apply the limit to the battery"
+          }
+        }
+      }
+    },
+    "控制模块已移除" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control Helper removed"
+          }
+        }
+      }
+    },
+    "控制模块注册请求已提交" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control Helper registration requested"
+          }
+        }
+      }
+    },
+    "控制状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Control Status"
+          }
+        }
+      }
+    },
+    "放电控制键" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discharge Control Key"
+          }
+        }
+      }
+    },
+    "新增" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        }
+      }
+    },
+    "新增计划" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New Schedule"
+          }
+        }
+      }
+    },
+    "日" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sun"
+          }
+        }
+      }
+    },
+    "日志" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Log"
+          }
+        }
+      }
+    },
+    "时间" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Time"
+          }
+        }
+      }
+    },
+    "显示内容" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Display"
+          }
+        }
+      }
+    },
+    "暂不支持" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Supported"
+          }
+        }
+      }
+    },
+    "暂停充电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause Charging"
+          }
+        }
+      }
+    },
+    "暂停或恢复充电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause or Resume Charging"
+          }
+        }
+      }
+    },
+    "暂停或恢复电池港充电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause or Resume Battery Harbor Charging"
+          }
+        }
+      }
+    },
+    "暂无执行记录" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Run History"
+          }
+        }
+      }
+    },
+    "更改会立即应用到屏幕顶部的电池港图标和读数。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Changes apply immediately to the Battery Harbor icon and readout in the menu bar."
+          }
+        }
+      }
+    },
+    "更新模块" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Update Helper"
+          }
+        }
+      }
+    },
+    "未检测到" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Detected"
+          }
+        }
+      }
+    },
+    "未检测到电池" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Battery Detected"
+          }
+        }
+      }
+    },
+    "未知固件" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown Firmware"
+          }
+        }
+      }
+    },
+    "未知机型" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown Model"
+          }
+        }
+      }
+    },
+    "未知电源" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown Power Source"
+          }
+        }
+      }
+    },
+    "本机历史数据" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local History"
+          }
+        }
+      }
+    },
+    "机型" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mac Model"
+          }
+        }
+      }
+    },
+    "权限不足" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Insufficient Privileges"
+          }
+        }
+      }
+    },
+    "查看电池详情" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View Battery Details"
+          }
+        }
+      }
+    },
+    "校准已取消" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibration Cancelled"
+          }
+        }
+      }
+    },
+    "校准已完成" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calibration Complete"
+          }
+        }
+      }
+    },
+    "概览" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Overview"
+          }
+        }
+      }
+    },
+    "正值：充入电池" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Positive: charging the battery"
+          }
+        }
+      }
+    },
+    "正在使用强制放电降低至 10%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Force discharging to 10%."
+          }
+        }
+      }
+    },
+    "正在充电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging"
+          }
+        }
+      }
+    },
+    "正在充至 100%%，当前 %lld%%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Charging to 100%%: currently %lld%%."
+          }
+        }
+      }
+    },
+    "正在向充电控制模块应用设置…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Applying settings through the charging controller…"
+          }
+        }
+      }
+    },
+    "正在建立基线" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Establishing a Baseline"
+          }
+        }
+      }
+    },
+    "正在执行 CHTE 写入、回读和立即恢复…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Writing CHTE, reading it back, and immediately restoring the original value…"
+          }
+        }
+      }
+    },
+    "正在提交临时充满命令…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requesting temporary full charge…"
+          }
+        }
+      }
+    },
+    "正在提交恢复充电命令…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requesting charging resume…"
+          }
+        }
+      }
+    },
+    "正在提交暂停充电命令…" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Requesting charging pause…"
+          }
+        }
+      }
+    },
+    "正在放电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discharging"
+          }
+        }
+      }
+    },
+    "正在放电至 10%%，当前 %lld%%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Discharging to 10%%: currently %lld%%."
+          }
+        }
+      }
+    },
+    "正在验证并恢复原值…" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verifying and restoring the original value…"
+          }
+        }
+      }
+    },
+    "每 2 秒采样 · 最近 6 分钟" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sampled every 2 seconds · Last 6 minutes"
+          }
+        }
+      }
+    },
+    "每天" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Every Day"
+          }
+        }
+      }
+    },
+    "流入电池" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Into Battery"
+          }
+        }
+      }
+    },
+    "流向系统" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "To System"
+          }
+        }
+      }
+    },
+    "测试连接" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test Connection"
+          }
+        }
+      }
+    },
+    "测试通知已提交给 macOS 通知中心" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Test notification submitted to macOS Notification Center"
+          }
+        }
+      }
+    },
+    "清除" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        }
+      }
+    },
+    "清除历史" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear History"
+          }
+        }
+      }
+    },
+    "温度降至阈值以下 3°C 后解除；唤醒后按当前上限恢复。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Protection ends 3°C below the threshold; charging resumes to the current limit after wake."
+          }
+        }
+      }
+    },
+    "满电静置中，还需约 %lld 分钟。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resting at full charge for about %lld more minutes."
+          }
+        }
+      }
+    },
+    "特权 SMC 控制" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privileged SMC Control"
+          }
+        }
+      }
+    },
+    "状态未知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Unknown Status"
+          }
+        }
+      }
+    },
+    "瓦特" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Watts"
+          }
+        }
+      }
+    },
+    "用颜色区分电池状态" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Use Colors for Battery Status"
+          }
+        }
+      }
+    },
+    "电压" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Voltage"
+          }
+        }
+      }
+    },
+    "电池" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery"
+          }
+        }
+      }
+    },
+    "电池供电" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "On Battery"
+          }
+        }
+      }
+    },
+    "电池供电中" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Running on Battery"
+          }
+        }
+      }
+    },
+    "电池健康" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Health"
+          }
+        }
+      }
+    },
+    "电池养护" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Care"
+          }
+        }
+      }
+    },
+    "电池校准" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Calibration"
+          }
+        }
+      }
+    },
+    "电池温度" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Temperature"
+          }
+        }
+      }
+    },
+    "电池温度已恢复" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Temperature Restored"
+          }
+        }
+      }
+    },
+    "电池温度过高" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Temperature Too High"
+          }
+        }
+      }
+    },
+    "电池港" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor"
+          }
+        }
+      }
+    },
+    "电池港 · 技术预览版" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor · Technology Preview"
+          }
+        }
+      }
+    },
+    "电池港临时充满" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor Top Up to 100%"
+          }
+        }
+      }
+    },
+    "电池港控制模块当前不可用。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The Battery Harbor helper is currently unavailable."
+          }
+        }
+      }
+    },
+    "电池港未检测到内置电池。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor did not detect an internal battery."
+          }
+        }
+      }
+    },
+    "电池港测试通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor Test Notification"
+          }
+        }
+      }
+    },
+    "电池港设置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Harbor Settings"
+          }
+        }
+      }
+    },
+    "电池港运行时会每 30 秒保存一次，最多保留 24 小时。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "While Battery Harbor is running, samples are saved every 30 seconds and retained for up to 24 hours."
+          }
+        }
+      }
+    },
+    "电池状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Status"
+          }
+        }
+      }
+    },
+    "电池补充系统" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Assisting System"
+          }
+        }
+      }
+    },
+    "电池详情" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Details"
+          }
+        }
+      }
+    },
+    "电池输出" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Battery Output"
+          }
+        }
+      }
+    },
+    "电流" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Current"
+          }
+        }
+      }
+    },
+    "电源适配器" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Power Adapter"
+          }
+        }
+      }
+    },
+    "电量与功率" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Level & Power"
+          }
+        }
+      }
+    },
+    "界面正文会立即更新；系统窗口标题和快捷指令可能需要重新启动 App 后更新。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface content updates immediately. System window titles and Shortcuts may require an app restart."
+          }
+        }
+      }
+    },
+    "界面语言" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Interface Language"
+          }
+        }
+      }
+    },
+    "登录时启动电池港" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Launch Battery Harbor at Login"
+          }
+        }
+      }
+    },
+    "目标 %lld%%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Target %lld%%"
+          }
+        }
+      }
+    },
+    "睡眠充电保护" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sleep Charging Protection"
+          }
+        }
+      }
+    },
+    "硬件写入" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardware Writes"
+          }
+        }
+      }
+    },
+    "硬件控制已由用户重新锁定" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardware control was relocked by the user"
+          }
+        }
+      }
+    },
+    "硬件控制需通过签名 Helper 和人工确认测试。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hardware control requires a signed helper and manual verification."
+          }
+        }
+      }
+    },
+    "移除模块" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remove Helper"
+          }
+        }
+      }
+    },
+    "第一阶段：充至 100%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stage 1: Charge to 100%"
+          }
+        }
+      }
+    },
+    "第三阶段：放电至 10%" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stage 3: Discharge to 10%"
+          }
+        }
+      }
+    },
+    "第二阶段：满电静置" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stage 2: Rest at Full Charge"
+          }
+        }
+      }
+    },
+    "第四阶段：重新充满" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stage 4: Fully Recharge"
+          }
+        }
+      }
+    },
+    "等待管理员批准" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for Administrator Approval"
+          }
+        }
+      }
+    },
+    "等待连接电源以完成最后一次充电。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect the power adapter to complete the final charge."
+          }
+        }
+      }
+    },
+    "等待连接电源后继续充至 100%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Waiting for the power adapter before charging to 100%."
+          }
+        }
+      }
+    },
+    "简体中文" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Simplified Chinese"
+          }
+        }
+      }
+    },
+    "系统" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System"
+          }
+        }
+      }
+    },
+    "系统 Liquid Glass" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Liquid Glass"
+          }
+        }
+      }
+    },
+    "系统使用" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Use"
+          }
+        }
+      }
+    },
+    "系统原生上限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native System Limit"
+          }
+        }
+      }
+    },
+    "系统原生充电上限" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Native Charge Limit"
+          }
+        }
+      }
+    },
+    "系统固件" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "System Firmware"
+          }
+        }
+      }
+    },
+    "系统尚未识别模块" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Helper Not Recognized by macOS"
+          }
+        }
+      }
+    },
+    "约 %lld 分钟" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About %lld min"
+          }
+        }
+      }
+    },
+    "约 %lld 小时 %lld 分钟" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "About %lld hr %lld min"
+          }
+        }
+      }
+    },
+    "结束临时充满" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "End Temporary Full Charge"
+          }
+        }
+      }
+    },
+    "统计范围" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Range"
+          }
+        }
+      }
+    },
+    "编辑计划" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit Schedule"
+          }
+        }
+      }
+    },
+    "耗电历史排行" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy Use History"
+          }
+        }
+      }
+    },
+    "能耗历史已导出到 %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Energy history exported to %@"
+          }
+        }
+      }
+    },
+    "自动保护" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatic Protection"
+          }
+        }
+      }
+    },
+    "自检只会短暂切换 CHTE，随后回读并恢复原值；任何一步失败都不会解锁。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The check briefly toggles CHTE, reads it back, and restores the original value. Any failure keeps control locked."
+          }
+        }
+      }
+    },
+    "自检无法开始：请先安装、批准控制模块并完成安全握手" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Self-test cannot start. Install and approve the control Helper, then complete the safety handshake."
+          }
+        }
+      }
+    },
+    "获取电池港状态" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Get Battery Harbor Status"
+          }
+        }
+      }
+    },
+    "菜单栏实时读数" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu Bar Readout"
+          }
+        }
+      }
+    },
+    "菜单栏预览" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Menu Bar Preview"
+          }
+        }
+      }
+    },
+    "计划" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
+          }
+        }
+      }
+    },
+    "计划与快捷指令" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedules and Shortcuts"
+          }
+        }
+      }
+    },
+    "计划与自动化" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule"
+          }
+        }
+      }
+    },
+    "计划仅在电池港运行时检查；所有动作仍受 Helper 和人工确认闸门保护。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedules are checked only while Battery Harbor is running. Every action remains protected by the helper and manual verification gate."
+          }
+        }
+      }
+    },
+    "计划任务" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedules"
+          }
+        }
+      }
+    },
+    "计划任务已执行" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule Executed"
+          }
+        }
+      }
+    },
+    "计划任务触发后会在这里记录结果。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Results appear here after a schedule runs."
+          }
+        }
+      }
+    },
+    "计划名称" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule Name"
+          }
+        }
+      }
+    },
+    "计划执行日志" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Schedule Run Log"
+          }
+        }
+      }
+    },
+    "计算中" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Calculating"
+          }
+        }
+      }
+    },
+    "设置" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        }
+      }
+    },
+    "设置充电上限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Charge Limit"
+          }
+        }
+      }
+    },
+    "设置电池港充电上限" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Set Battery Harbor Charge Limit"
+          }
+        }
+      }
+    },
+    "设计容量" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Design Capacity"
+          }
+        }
+      }
+    },
+    "诊断" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnostics"
+          }
+        }
+      }
+    },
+    "诊断报告已导出到 %@" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Diagnostic report exported to %@"
+          }
+        }
+      }
+    },
+    "语言" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Language"
+          }
+        }
+      }
+    },
+    "请先允许电池港发送通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Allow Battery Harbor to send notifications first"
+          }
+        }
+      }
+    },
+    "请连接电源，电池港将先把电池充至 100%。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect the power adapter. Battery Harbor will first charge the battery to 100%."
+          }
+        }
+      }
+    },
+    "请连接电源；校准放电由适配器供电状态下安全执行。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connect the power adapter; calibration discharge runs safely while the adapter powers the system."
+          }
+        }
+      }
+    },
+    "负值：电池输出" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Negative: battery output"
+          }
+        }
+      }
+    },
+    "超出上限时自动放电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automatically Discharge Above Limit"
+          }
+        }
+      }
+    },
+    "跟随系统" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Follow System"
+          }
+        }
+      }
+    },
+    "输入" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Input"
+          }
+        }
+      }
+    },
+    "过去 1 小时的本机累计采样" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local cumulative samples from the past hour"
+          }
+        }
+      }
+    },
+    "过去 24 小时的本机累计采样" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Local cumulative samples from the past 24 hours"
+          }
+        }
+      }
+    },
+    "返回当前电量、充电状态、温度和功率。" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Returns the current battery level, charging status, temperature, and power."
+          }
+        }
+      }
+    },
+    "还没有计划" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No Schedules Yet"
+          }
+        }
+      }
+    },
+    "还没有足够的历史数据" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Not Enough History Yet"
+          }
+        }
+      }
+    },
+    "连接" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Connection"
+          }
+        }
+      }
+    },
+    "连接电源、开始或停止充电时发送系统通知。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Send system notifications when power is connected or charging starts or stops."
+          }
+        }
+      }
+    },
+    "退出" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Quit"
+          }
+        }
+      }
+    },
+    "适配器供电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adapter Power"
+          }
+        }
+      }
+    },
+    "适配器已连接" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Adapter Connected"
+          }
+        }
+      }
+    },
+    "通用" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "General"
+          }
+        }
+      }
+    },
+    "通知" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Notifications"
+          }
+        }
+      }
+    },
+    "通知通道已提交；今后接电、断电和充电状态变化时会按设置提醒。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The notification was submitted. Future power and charging-state changes will follow your notification settings."
+          }
+        }
+      }
+    },
+    "重复" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Repeat"
+          }
+        }
+      }
+    },
+    "重新检测" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Check Again"
+          }
+        }
+      }
+    },
+    "重新锁定硬件控制" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Relock Hardware Control"
+          }
+        }
+      }
+    },
+    "零功率" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zero Power"
+          }
+        }
+      }
+    },
+    "静置阶段需要连接电源，请重新接入。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The rest stage requires external power. Reconnect the adapter."
+          }
+        }
+      }
+    },
+    "页面" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Page"
+          }
+        }
+      }
+    },
+    "预计时间" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estimated Time"
+          }
+        }
+      }
+    },
+    "高温保护正在生效" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-Temperature Protection Is Active"
+          }
+        }
+      }
+    },
+    "高温保护解除，将按当前上限恢复巡航。" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "High-temperature protection ended. Monitoring will resume with the current charge limit."
+          }
+        }
+      }
+    },
+    "高温时暂停充电" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pause Charging at High Temperature"
+          }
+        }
+      }
+    },
+    "高温阈值" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Temperature Threshold"
+          }
+        }
+      }
+    },
+    "高级" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Advanced"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}

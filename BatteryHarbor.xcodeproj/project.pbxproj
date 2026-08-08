@@ -1,0 +1,611 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 71;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B00000000000000000000001 /* Sources/BatteryHarbor/BatteryHarborApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000001 /* Sources/BatteryHarbor/BatteryHarborApp.swift */; };
+		B00000000000000000000002 /* Sources/BatteryHarbor/Models/BatterySnapshot.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000002 /* Sources/BatteryHarbor/Models/BatterySnapshot.swift */; };
+		B00000000000000000000003 /* Sources/BatteryHarbor/Services/BatteryReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000003 /* Sources/BatteryHarbor/Services/BatteryReader.swift */; };
+		B00000000000000000000004 /* Sources/BatteryHarbor/Services/ChargeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000004 /* Sources/BatteryHarbor/Services/ChargeController.swift */; };
+		B00000000000000000000005 /* Sources/BatteryHarbor/Store/BatteryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000005 /* Sources/BatteryHarbor/Store/BatteryStore.swift */; };
+		B00000000000000000000006 /* Sources/BatteryHarbor/Views/DashboardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000006 /* Sources/BatteryHarbor/Views/DashboardView.swift */; };
+		B00000000000000000000007 /* Sources/BatteryHarbor/Views/PowerChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000007 /* Sources/BatteryHarbor/Views/PowerChartView.swift */; };
+		B00000000000000000000008 /* Sources/BatteryHarbor/Views/AutomationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000008 /* Sources/BatteryHarbor/Views/AutomationView.swift */; };
+		B00000000000000000000009 /* Sources/BatteryHarbor/Views/SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000009 /* Sources/BatteryHarbor/Views/SettingsView.swift */; };
+		B0000000000000000000000A /* Assets/Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000000A /* Assets/Assets.xcassets */; };
+		B0000000000000000000000B /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0000000000000000000000B /* IOKit.framework */; };
+		B0000000000000000000000C /* Tests/BatteryHarborTests/BatteryReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000000C /* Tests/BatteryHarborTests/BatteryReaderTests.swift */; };
+		B0000000000000000000000D /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0000000000000000000000D /* XCTest.framework */; };
+		B00000000000000000000010 /* Sources/BatteryHarbor/Models/HardwareCapabilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000010 /* Sources/BatteryHarbor/Models/HardwareCapabilities.swift */; };
+		B00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift */; };
+		B00000000000000000000012 /* Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000012 /* Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift */; };
+		B00000000000000000000013 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift */; };
+		B00000000000000000000014 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A00000000000000000000014 /* ServiceManagement.framework */; };
+		B00000000000000000000015 /* BatteryHarborHelper in Copy Helper */ = {isa = PBXBuildFile; fileRef = A00000000000000000000015 /* BatteryHarborHelper */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B00000000000000000000016 /* Resources/com.batteryharbor.helper.plist in Copy Daemon Plist */ = {isa = PBXBuildFile; fileRef = A00000000000000000000013 /* Resources/com.batteryharbor.helper.plist */; };
+		B00000000000000000000017 /* Sources/BatteryHarbor/Models/AppEnergyUsage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000016 /* Sources/BatteryHarbor/Models/AppEnergyUsage.swift */; };
+		B00000000000000000000018 /* Sources/BatteryHarbor/Services/AppEnergyMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000017 /* Sources/BatteryHarbor/Services/AppEnergyMonitor.swift */; };
+		B00000000000000000000019 /* Sources/BatteryHarbor/Views/AppEnergyRankingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000018 /* Sources/BatteryHarbor/Views/AppEnergyRankingView.swift */; };
+		B0000000000000000000001A /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000019 /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift */; };
+		B0000000000000000000001B /* Sources/BatteryHarbor/Services/ChargePolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001A /* Sources/BatteryHarbor/Services/ChargePolicy.swift */; };
+		B0000000000000000000001C /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001B /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift */; };
+		B0000000000000000000001D /* Sources/BatteryHarbor/Models/AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001C /* Sources/BatteryHarbor/Models/AppPreferences.swift */; };
+		B0000000000000000000001E /* Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001D /* Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift */; };
+		B0000000000000000000001F /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000019 /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift */; };
+		B00000000000000000000020 /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001B /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift */; };
+		B00000000000000000000021 /* IOKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0000000000000000000000B /* IOKit.framework */; };
+		B00000000000000000000022 /* Sources/BatteryHarbor/Models/ChargeSchedule.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001E /* Sources/BatteryHarbor/Models/ChargeSchedule.swift */; };
+		B00000000000000000000023 /* Sources/BatteryHarbor/Services/BatteryHarborIntents.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000000000000000000001F /* Sources/BatteryHarbor/Services/BatteryHarborIntents.swift */; };
+		B00000000000000000000024 /* Sources/BatteryHarbor/Models/BatteryCalibration.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000020 /* Sources/BatteryHarbor/Models/BatteryCalibration.swift */; };
+		B00000000000000000000025 /* Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000021 /* Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift */; };
+		B00000000000000000000026 /* Sources/BatteryHarbor/Views/BatteryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000022 /* Sources/BatteryHarbor/Views/BatteryDetailView.swift */; };
+		B00000000000000000000027 /* Sources/BatteryHarbor/Views/ScheduleLogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000023 /* Sources/BatteryHarbor/Views/ScheduleLogView.swift */; };
+		B00000000000000000000028 /* Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000024 /* Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift */; };
+		B00000000000000000000029 /* Sources/BatteryHarbor/Services/L10n.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000025 /* Sources/BatteryHarbor/Services/L10n.swift */; };
+		B0000000000000000000002A /* Sources/BatteryHarbor/Resources/Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = A00000000000000000000026 /* Sources/BatteryHarbor/Resources/Localizable.xcstrings */; };
+		B0000000000000000000002B /* Resources/io.github.muu3327.batteryharbor.helper.plist in Copy Daemon Plist */ = {isa = PBXBuildFile; fileRef = A00000000000000000000027 /* Resources/io.github.muu3327.batteryharbor.helper.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D00000000000000000000001 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T00000000000000000000001;
+			remoteInfo = BatteryHarbor;
+		};
+		D00000000000000000000003 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = P00000000000000000000001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = T00000000000000000000003;
+			remoteInfo = BatteryHarborHelper;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		Y00000000000000000000001 /* Copy Helper */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/HelperTools;
+			dstSubfolderSpec = 1;
+			files = (
+				B00000000000000000000015 /* BatteryHarborHelper in Copy Helper */,
+			);
+			name = "Copy Helper";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		Y00000000000000000000002 /* Copy Daemon Plist */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LaunchDaemons;
+			dstSubfolderSpec = 1;
+			files = (
+				B00000000000000000000016 /* Resources/com.batteryharbor.helper.plist in Copy Daemon Plist */,
+				B0000000000000000000002B /* Resources/io.github.muu3327.batteryharbor.helper.plist in Copy Daemon Plist */,
+			);
+			name = "Copy Daemon Plist";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		A00000000000000000000001 /* Sources/BatteryHarbor/BatteryHarborApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/BatteryHarborApp.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000002 /* Sources/BatteryHarbor/Models/BatterySnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/BatterySnapshot.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000003 /* Sources/BatteryHarbor/Services/BatteryReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/BatteryReader.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000004 /* Sources/BatteryHarbor/Services/ChargeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/ChargeController.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000005 /* Sources/BatteryHarbor/Store/BatteryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Store/BatteryStore.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000006 /* Sources/BatteryHarbor/Views/DashboardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/DashboardView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000007 /* Sources/BatteryHarbor/Views/PowerChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/PowerChartView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000008 /* Sources/BatteryHarbor/Views/AutomationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/AutomationView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000009 /* Sources/BatteryHarbor/Views/SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/SettingsView.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000000A /* Assets/Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000000B /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
+		A0000000000000000000000C /* Tests/BatteryHarborTests/BatteryReaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests/BatteryHarborTests/BatteryReaderTests.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000000D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Platforms/MacOSX.platform/Developer/Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		A0000000000000000000000E /* BatteryHarbor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BatteryHarbor.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A0000000000000000000000F /* BatteryHarborTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BatteryHarborTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00000000000000000000010 /* Sources/BatteryHarbor/Models/HardwareCapabilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/HardwareCapabilities.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000012 /* Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000013 /* Resources/com.batteryharbor.helper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Resources/com.batteryharbor.helper.plist; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000014 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
+		A00000000000000000000015 /* BatteryHarborHelper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = BatteryHarborHelper; sourceTree = BUILT_PRODUCTS_DIR; };
+		A00000000000000000000016 /* Sources/BatteryHarbor/Models/AppEnergyUsage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/AppEnergyUsage.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000017 /* Sources/BatteryHarbor/Services/AppEnergyMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/AppEnergyMonitor.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000018 /* Sources/BatteryHarbor/Views/AppEnergyRankingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/AppEnergyRankingView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000019 /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001A /* Sources/BatteryHarbor/Services/ChargePolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/ChargePolicy.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001B /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/SMCWriteTransaction.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001C /* Sources/BatteryHarbor/Models/AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/AppPreferences.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001D /* Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001E /* Sources/BatteryHarbor/Models/ChargeSchedule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/ChargeSchedule.swift; sourceTree = SOURCE_ROOT; };
+		A0000000000000000000001F /* Sources/BatteryHarbor/Services/BatteryHarborIntents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/BatteryHarborIntents.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000020 /* Sources/BatteryHarbor/Models/BatteryCalibration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Models/BatteryCalibration.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000021 /* Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000022 /* Sources/BatteryHarbor/Views/BatteryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/BatteryDetailView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000023 /* Sources/BatteryHarbor/Views/ScheduleLogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Views/ScheduleLogView.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000024 /* Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000025 /* Sources/BatteryHarbor/Services/L10n.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sources/BatteryHarbor/Services/L10n.swift; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000026 /* Sources/BatteryHarbor/Resources/Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Sources/BatteryHarbor/Resources/Localizable.xcstrings; sourceTree = SOURCE_ROOT; };
+		A00000000000000000000027 /* Resources/io.github.muu3327.batteryharbor.helper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Resources/io.github.muu3327.batteryharbor.helper.plist; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F00000000000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0000000000000000000000B /* IOKit.framework in Frameworks */,
+				B00000000000000000000014 /* ServiceManagement.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0000000000000000000000D /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F00000000000000000000003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000021 /* IOKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		G00000000000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				G00000000000000000000002 /* Sources */,
+				G00000000000000000000003 /* Tests */,
+				G00000000000000000000004 /* Resources */,
+				G00000000000000000000005 /* Frameworks */,
+				G00000000000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		G00000000000000000000002 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A00000000000000000000001 /* Sources/BatteryHarbor/BatteryHarborApp.swift */,
+				A00000000000000000000002 /* Sources/BatteryHarbor/Models/BatterySnapshot.swift */,
+				A00000000000000000000010 /* Sources/BatteryHarbor/Models/HardwareCapabilities.swift */,
+				A00000000000000000000016 /* Sources/BatteryHarbor/Models/AppEnergyUsage.swift */,
+				A0000000000000000000001C /* Sources/BatteryHarbor/Models/AppPreferences.swift */,
+				A0000000000000000000001E /* Sources/BatteryHarbor/Models/ChargeSchedule.swift */,
+				A00000000000000000000020 /* Sources/BatteryHarbor/Models/BatteryCalibration.swift */,
+				A00000000000000000000003 /* Sources/BatteryHarbor/Services/BatteryReader.swift */,
+				A00000000000000000000004 /* Sources/BatteryHarbor/Services/ChargeController.swift */,
+				A00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift */,
+				A00000000000000000000017 /* Sources/BatteryHarbor/Services/AppEnergyMonitor.swift */,
+				A00000000000000000000021 /* Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift */,
+				A00000000000000000000024 /* Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift */,
+				A00000000000000000000025 /* Sources/BatteryHarbor/Services/L10n.swift */,
+				A00000000000000000000019 /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift */,
+				A0000000000000000000001A /* Sources/BatteryHarbor/Services/ChargePolicy.swift */,
+				A0000000000000000000001B /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift */,
+				A0000000000000000000001F /* Sources/BatteryHarbor/Services/BatteryHarborIntents.swift */,
+				A00000000000000000000005 /* Sources/BatteryHarbor/Store/BatteryStore.swift */,
+				A00000000000000000000006 /* Sources/BatteryHarbor/Views/DashboardView.swift */,
+				A00000000000000000000007 /* Sources/BatteryHarbor/Views/PowerChartView.swift */,
+				A00000000000000000000008 /* Sources/BatteryHarbor/Views/AutomationView.swift */,
+				A00000000000000000000009 /* Sources/BatteryHarbor/Views/SettingsView.swift */,
+				A00000000000000000000022 /* Sources/BatteryHarbor/Views/BatteryDetailView.swift */,
+				A00000000000000000000023 /* Sources/BatteryHarbor/Views/ScheduleLogView.swift */,
+				A00000000000000000000018 /* Sources/BatteryHarbor/Views/AppEnergyRankingView.swift */,
+				A00000000000000000000012 /* Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift */,
+				A0000000000000000000001D /* Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift */,
+			);
+			name = Sources;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000003 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000C /* Tests/BatteryHarborTests/BatteryReaderTests.swift */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000004 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000A /* Assets/Assets.xcassets */,
+				A00000000000000000000013 /* Resources/com.batteryharbor.helper.plist */,
+				A00000000000000000000027 /* Resources/io.github.muu3327.batteryharbor.helper.plist */,
+				A00000000000000000000026 /* Sources/BatteryHarbor/Resources/Localizable.xcstrings */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000005 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000B /* IOKit.framework */,
+				A0000000000000000000000D /* XCTest.framework */,
+				A00000000000000000000014 /* ServiceManagement.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		G00000000000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A0000000000000000000000E /* BatteryHarbor.app */,
+				A0000000000000000000000F /* BatteryHarborTests.xctest */,
+				A00000000000000000000015 /* BatteryHarborHelper */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		T00000000000000000000001 /* BatteryHarbor */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L00000000000000000000002 /* Build configuration list for PBXNativeTarget "BatteryHarbor" */;
+			buildPhases = (
+				S00000000000000000000001 /* Sources */,
+				F00000000000000000000001 /* Frameworks */,
+				R00000000000000000000001 /* Resources */,
+				Y00000000000000000000001 /* Copy Helper */,
+				Y00000000000000000000002 /* Copy Daemon Plist */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D00000000000000000000004 /* PBXTargetDependency */,
+			);
+			name = BatteryHarbor;
+			productName = BatteryHarbor;
+			productReference = A0000000000000000000000E /* BatteryHarbor.app */;
+			productType = "com.apple.product-type.application";
+		};
+		T00000000000000000000002 /* BatteryHarborTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L00000000000000000000003 /* Build configuration list for PBXNativeTarget "BatteryHarborTests" */;
+			buildPhases = (
+				S00000000000000000000002 /* Sources */,
+				F00000000000000000000002 /* Frameworks */,
+				R00000000000000000000002 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D00000000000000000000002 /* PBXTargetDependency */,
+			);
+			name = BatteryHarborTests;
+			productName = BatteryHarborTests;
+			productReference = A0000000000000000000000F /* BatteryHarborTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		T00000000000000000000003 /* BatteryHarborHelper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = L00000000000000000000004 /* Build configuration list for PBXNativeTarget "BatteryHarborHelper" */;
+			buildPhases = (
+				S00000000000000000000003 /* Sources */,
+				F00000000000000000000003 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BatteryHarborHelper;
+			productName = BatteryHarborHelper;
+			productReference = A00000000000000000000015 /* BatteryHarborHelper */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		P00000000000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2600;
+				LastUpgradeCheck = 2600;
+				TargetAttributes = {
+					T00000000000000000000001 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+					T00000000000000000000002 = {
+						CreatedOnToolsVersion = 26.0;
+						TestTargetID = T00000000000000000000001;
+					};
+					T00000000000000000000003 = {
+						CreatedOnToolsVersion = 26.0;
+					};
+				};
+			};
+			buildConfigurationList = L00000000000000000000001 /* Build configuration list for PBXProject "BatteryHarbor" */;
+			compatibilityVersion = "Xcode 16.0";
+			developmentRegion = "zh-Hans";
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+				"zh-Hans",
+			);
+			mainGroup = G00000000000000000000001;
+			productRefGroup = G00000000000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				T00000000000000000000001 /* BatteryHarbor */,
+				T00000000000000000000002 /* BatteryHarborTests */,
+				T00000000000000000000003 /* BatteryHarborHelper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		R00000000000000000000001 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0000000000000000000000A /* Assets/Assets.xcassets in Resources */,
+				B0000000000000000000002A /* Sources/BatteryHarbor/Resources/Localizable.xcstrings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		R00000000000000000000002 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		S00000000000000000000001 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000001 /* Sources/BatteryHarbor/BatteryHarborApp.swift in Sources */,
+				B00000000000000000000002 /* Sources/BatteryHarbor/Models/BatterySnapshot.swift in Sources */,
+				B00000000000000000000010 /* Sources/BatteryHarbor/Models/HardwareCapabilities.swift in Sources */,
+				B00000000000000000000017 /* Sources/BatteryHarbor/Models/AppEnergyUsage.swift in Sources */,
+				B0000000000000000000001D /* Sources/BatteryHarbor/Models/AppPreferences.swift in Sources */,
+				B00000000000000000000022 /* Sources/BatteryHarbor/Models/ChargeSchedule.swift in Sources */,
+				B00000000000000000000024 /* Sources/BatteryHarbor/Models/BatteryCalibration.swift in Sources */,
+				B00000000000000000000003 /* Sources/BatteryHarbor/Services/BatteryReader.swift in Sources */,
+				B00000000000000000000004 /* Sources/BatteryHarbor/Services/ChargeController.swift in Sources */,
+				B00000000000000000000011 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift in Sources */,
+				B00000000000000000000018 /* Sources/BatteryHarbor/Services/AppEnergyMonitor.swift in Sources */,
+				B00000000000000000000025 /* Sources/BatteryHarbor/Services/EnergyHistoryArchive.swift in Sources */,
+				B00000000000000000000028 /* Sources/BatteryHarbor/Services/DiagnosticReportBuilder.swift in Sources */,
+				B00000000000000000000029 /* Sources/BatteryHarbor/Services/L10n.swift in Sources */,
+				B0000000000000000000001A /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift in Sources */,
+				B0000000000000000000001B /* Sources/BatteryHarbor/Services/ChargePolicy.swift in Sources */,
+				B0000000000000000000001C /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift in Sources */,
+				B00000000000000000000023 /* Sources/BatteryHarbor/Services/BatteryHarborIntents.swift in Sources */,
+				B00000000000000000000005 /* Sources/BatteryHarbor/Store/BatteryStore.swift in Sources */,
+				B00000000000000000000006 /* Sources/BatteryHarbor/Views/DashboardView.swift in Sources */,
+				B00000000000000000000007 /* Sources/BatteryHarbor/Views/PowerChartView.swift in Sources */,
+				B00000000000000000000008 /* Sources/BatteryHarbor/Views/AutomationView.swift in Sources */,
+				B00000000000000000000009 /* Sources/BatteryHarbor/Views/SettingsView.swift in Sources */,
+				B00000000000000000000026 /* Sources/BatteryHarbor/Views/BatteryDetailView.swift in Sources */,
+				B00000000000000000000027 /* Sources/BatteryHarbor/Views/ScheduleLogView.swift in Sources */,
+				B00000000000000000000019 /* Sources/BatteryHarbor/Views/AppEnergyRankingView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S00000000000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B0000000000000000000000C /* Tests/BatteryHarborTests/BatteryReaderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		S00000000000000000000003 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B00000000000000000000012 /* Sources/BatteryHarborHelper/BatteryHarborHelperMain.swift in Sources */,
+				B00000000000000000000013 /* Sources/BatteryHarbor/Services/ChargeHelperProtocol.swift in Sources */,
+				B0000000000000000000001E /* Sources/BatteryHarborHelper/SMCPrivilegedAccess.swift in Sources */,
+				B0000000000000000000001F /* Sources/BatteryHarbor/Services/SMCReadOnlyClient.swift in Sources */,
+				B00000000000000000000020 /* Sources/BatteryHarbor/Services/SMCWriteTransaction.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D00000000000000000000002 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T00000000000000000000001 /* BatteryHarbor */;
+			targetProxy = D00000000000000000000001 /* PBXContainerItemProxy */;
+		};
+		D00000000000000000000004 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = T00000000000000000000003 /* BatteryHarborHelper */;
+			targetProxy = D00000000000000000000003 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C00000000000000000000001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				ENABLE_TESTABILITY = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		C00000000000000000000002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		C00000000000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "电池港";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Debug;
+		};
+		C00000000000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "电池港";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
+				INFOPLIST_KEY_LSUIElement = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+			};
+			name = Release;
+		};
+		C00000000000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BatteryHarbor.app/Contents/MacOS/BatteryHarbor";
+			};
+			name = Debug;
+		};
+		C00000000000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor.tests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/BatteryHarbor.app/Contents/MacOS/BatteryHarbor";
+			};
+			name = Release;
+		};
+		C00000000000000000000007 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "电池港控制模块";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor.helper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		C00000000000000000000008 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_INJECT_BASE_ENTITLEMENTS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "电池港控制模块";
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				PRODUCT_BUNDLE_IDENTIFIER = io.github.muu3327.batteryharbor.helper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		L00000000000000000000001 /* Build configuration list for PBXProject "BatteryHarbor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C00000000000000000000001 /* Debug */,
+				C00000000000000000000002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L00000000000000000000002 /* Build configuration list for PBXNativeTarget "BatteryHarbor" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C00000000000000000000003 /* Debug */,
+				C00000000000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L00000000000000000000003 /* Build configuration list for PBXNativeTarget "BatteryHarborTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C00000000000000000000005 /* Debug */,
+				C00000000000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		L00000000000000000000004 /* Build configuration list for PBXNativeTarget "BatteryHarborHelper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C00000000000000000000007 /* Debug */,
+				C00000000000000000000008 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = P00000000000000000000001 /* Project object */;
+}

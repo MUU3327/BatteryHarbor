@@ -1,0 +1,7 @@
+#!/bin/sh
+# Temporary compatibility shim for the macOS 26.5 SDK bundled with CLT 26.6.
+# Remove this once a matching Xcode toolchain is selected with xcode-select.
+exec /Library/Developer/CommandLineTools/usr/bin/swiftc \
+  -Xfrontend -interface-compiler-version \
+  -Xfrontend 6.3.2 \
+  "$@"

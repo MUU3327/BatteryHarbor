@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-build:
+    name: Test and unsigned Xcode build
+    runs-on: macos-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          swift --version
+          xcodebuild -version
+
+      - name: Run unit tests
+        run: swift test
+
+      - name: Build app and helper without signing
+        run: |
+          xcodebuild \
+            -project BatteryHarbor.xcodeproj \
+            -scheme BatteryHarbor \
+            -configuration Debug \
+            -destination 'platform=macOS' \
+            -derivedDataPath .build/CI-DerivedData \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            build
+
+      - name: Confirm CI did not package release artifacts
+        run: |
+          test ! -e BatteryHarbor.dmg
+          test ! -e BatteryHarbor.pkg

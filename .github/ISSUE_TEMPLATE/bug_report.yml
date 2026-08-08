@@ -1,0 +1,80 @@
+name: Bug report
+description: 报告可以稳定复现的问题
+title: "[Bug] "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢反馈。请先移除 Apple ID、序列号、用户名和私人文件路径，再粘贴诊断信息。
+
+  - type: input
+    id: version
+    attributes:
+      label: 电池港版本
+      placeholder: 例如 0.1.0
+    validations:
+      required: true
+
+  - type: input
+    id: mac
+    attributes:
+      label: Mac 型号与芯片
+      placeholder: 例如 MacBook Pro 14-inch, M3 Pro
+    validations:
+      required: true
+
+  - type: input
+    id: macos
+    attributes:
+      label: macOS 版本
+      placeholder: 例如 macOS 15.5
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题描述
+      description: 说明预期结果与实际结果。
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      placeholder: |
+        1. 打开……
+        2. 设置……
+        3. 观察到……
+    validations:
+      required: true
+
+  - type: dropdown
+    id: helper
+    attributes:
+      label: 是否涉及充电控制 Helper
+      options:
+        - 不涉及
+        - 涉及，安全自检已通过
+        - 涉及，安全自检未通过
+        - 不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: 已脱敏的诊断信息
+      description: 可粘贴“高级 → 导出诊断报告”中与问题相关的部分，不要上传敏感信息。
+
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: 安全确认
+      options:
+        - label: 我已退出其他会修改充电状态的电池管理工具。
+          required: true
+        - label: 我已确认反馈中不包含 Apple ID、序列号或其他私人信息。
+          required: true

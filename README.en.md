@@ -54,11 +54,6 @@ The Helper locks hardware control again after the Helper or Mac restarts. See [H
 
 Intel Macs, additional Apple Silicon generations, and more macOS versions still need a broader compatibility matrix.
 
-The final app identifier is `io.github.muu3327.batteryharbor`; the Helper and Mach
-service use `io.github.muu3327.batteryharbor.helper`. The legacy `com.batteryharbor`
-plist is retained for one migration release only, so early test Helpers can be
-safely unregistered. It is never used for new registrations.
-
 ## Build locally
 
 ### Xcode (recommended)

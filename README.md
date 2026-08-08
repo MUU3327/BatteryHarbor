@@ -54,10 +54,6 @@ Helper 或 Mac 重启后会重新锁定控制能力。完整实机步骤见 [充
 
 Intel Mac、不同 Apple Silicon 代际及更多 macOS 版本尚未形成完整兼容性矩阵。
 
-最终标识为 `io.github.muu3327.batteryharbor`；Helper 与 Mach Service 使用
-`io.github.muu3327.batteryharbor.helper`。旧 `com.batteryharbor` plist 仅保留一版，
-用于升级时安全注销早期测试 Helper，不会用于新注册。
-
 ## 本地构建
 
 ### Xcode（推荐）

@@ -117,8 +117,6 @@ xcodebuild \
 - [安全策略](SECURITY.md)
 - [隐私说明](PRIVACY.md)
 - [变更记录](CHANGELOG.md)
-- [`0.1.0-alpha.2` 双语发布说明](Docs/ReleaseNotes-0.1.0-alpha.2.md)
-- [发布检查清单](Docs/ReleaseChecklist.md)
 - [未公证社区 DMG：安装、升级与卸载](Docs/CommunityDMG.md)
 - [兼容性矩阵](Docs/Compatibility.md)
 - [干净账号发行验证](Docs/CleanEnvironmentTest.md)

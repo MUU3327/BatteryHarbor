@@ -117,8 +117,6 @@ The current source contains no network requests, telemetry, ads, or third-party 
 - [Security policy](SECURITY.md)
 - [Privacy](PRIVACY.md)
 - [Changelog](CHANGELOG.md)
-- [`0.1.0-alpha.2` bilingual release notes](Docs/ReleaseNotes-0.1.0-alpha.2.md)
-- [Release checklist](Docs/ReleaseChecklist.md)
 - [Unnotarized community DMG: install, upgrade, and uninstall](Docs/CommunityDMG.en.md)
 - [Compatibility matrix](Docs/Compatibility.md)
 - [Clean-account release verification](Docs/CleanEnvironmentTest.md)

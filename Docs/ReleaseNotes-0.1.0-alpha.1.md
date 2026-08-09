@@ -8,6 +8,8 @@
 
 这是电池港首个开源技术预览候选版本。电池港是一款原生 macOS 菜单栏电池养护工具，包含低层 AppleSMC 充电控制。请先阅读安全提示和兼容性矩阵；未经安全自检，不要启用正式充电控制。
 
+> 说明：此 alpha.1 安装包生成于仓库首次 Git 提交之前。版本标签指向最早的公开源码快照，但该源码快照并不是此历史二进制的逐字节构建来源。
+
 ### 主要功能
 
 - 可拖动充电上限、3% 回差、暂停/恢复充电
@@ -64,6 +66,8 @@ DMG SHA-256：
 ## English
 
 This is the first open-source technical-preview candidate of Battery Harbor, a native macOS menu bar battery-care utility with low-level AppleSMC charging control. Read the safety guidance and compatibility matrix first. Do not enable production charge control before completing the safety self-test.
+
+> Note: this alpha.1 installer predates the repository's first Git commit. The version tag points to the earliest public source snapshot, but that snapshot is not the byte-for-byte build source for this historical binary.
 
 ### Highlights
 

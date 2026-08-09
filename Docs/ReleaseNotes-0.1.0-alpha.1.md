@@ -42,9 +42,9 @@ DMG SHA-256：
 
 详细步骤见：
 
-- [社区 DMG 安装、升级与卸载](CommunityDMG.md)
-- [充电控制安全自检](HardwareVerification.md)
-- [兼容性矩阵](Compatibility.md)
+- [社区 DMG 安装、升级与卸载](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/CommunityDMG.md)
+- [充电控制安全自检](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/HardwareVerification.md)
+- [兼容性矩阵](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/Compatibility.md)
 
 ### 已验证环境
 
@@ -101,9 +101,9 @@ After installing the Helper, the user must personally complete the `CHTE` tempor
 
 Detailed guidance:
 
-- [Community DMG installation, upgrade, and removal](CommunityDMG.en.md)
-- [Hardware control safety verification](HardwareVerification.md)
-- [Compatibility matrix](Compatibility.md)
+- [Community DMG installation, upgrade, and removal](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/CommunityDMG.en.md)
+- [Hardware control safety verification](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/HardwareVerification.md)
+- [Compatibility matrix](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/Compatibility.md)
 
 ### Verified environment
 

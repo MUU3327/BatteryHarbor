@@ -33,7 +33,7 @@ DMG SHA-256：
 
 该 DMG 使用项目自签名证书，**未经 Apple Developer ID 签名和公证**。首次打开需要前往“系统设置 → 隐私与安全性”点击“仍要打开”。不要关闭 Gatekeeper 或 SIP。
 
-在启用充电控制前，必须安装 Helper，并由本人完成 `CHTE` 临时写入、回读、原值恢复和二次回读安全自检。详细步骤见 [社区 DMG 安装说明](CommunityDMG.md) 和 [硬件安全自检](HardwareVerification.md)。
+在启用充电控制前，必须安装 Helper，并由本人完成 `CHTE` 临时写入、回读、原值恢复和二次回读安全自检。详细步骤见 [社区 DMG 安装说明](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/CommunityDMG.md) 和 [硬件安全自检](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/HardwareVerification.md)。
 
 ### 验证状态
 
@@ -76,7 +76,7 @@ DMG SHA-256:
 
 This DMG uses the project's self-signed certificate and is **not signed with Apple Developer ID or notarized by Apple**. On first launch, open System Settings > Privacy & Security and select Open Anyway. Never disable Gatekeeper or SIP.
 
-Before enabling charge control, install the Helper and personally complete the `CHTE` temporary write, read-back, original-value restoration, and second read-back safety self-test. See [Community DMG installation](CommunityDMG.en.md) and [hardware safety verification](HardwareVerification.md).
+Before enabling charge control, install the Helper and personally complete the `CHTE` temporary write, read-back, original-value restoration, and second read-back safety self-test. See [Community DMG installation](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/CommunityDMG.en.md) and [hardware safety verification](https://github.com/MUU3327/BatteryHarbor/blob/main/Docs/HardwareVerification.md).
 
 ### Verification status
 

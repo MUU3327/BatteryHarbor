@@ -4,7 +4,7 @@
 
 ## [Unreleased]
 
-## [0.1.0-alpha.2] - 2026-08-11
+## [0.2] - 2026-08-11
 
 ### Added
 
@@ -42,7 +42,7 @@
 - 自签名 root Helper 通过 `SMAppService` 注册、XPC v3/root 握手和 `CHTE` 原值恢复安全自检
 - 暂停/恢复、达到上限后暂停、临时充满和原上限恢复完成实机回归
 - 在无 Apple ID、无维护者证书的全新临时管理员账号完成 Gatekeeper、Helper、安全自检、暂停/恢复与完整移除回归
-- `0.1.0-alpha.2` arm64 社区 DMG 通过映像校验、嵌套签名、Bundle ID、共享叶证书和预期 Gatekeeper 行为验证
+- `0.2` arm64 社区 DMG 通过映像校验、嵌套签名、Bundle ID、共享叶证书和预期 Gatekeeper 行为验证
 
 [Unreleased]: https://github.com/MUU3327/BatteryHarbor/commits/main
-[0.1.0-alpha.2]: https://github.com/MUU3327/BatteryHarbor/releases/tag/v0.1.0-alpha.2
+[0.2]: https://github.com/MUU3327/BatteryHarbor/releases/tag/v0.2

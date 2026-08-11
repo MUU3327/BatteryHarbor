@@ -9,7 +9,7 @@
 ### 安装与 Gatekeeper
 
 1. 使用一个临时 macOS 管理员账号登录，不登录 Apple ID，不导入任何开发或发布证书。
-2. 在 Finder 中打开 `/Users/Shared/BatteryHarbor-0.1.0-alpha.1-clean-test.dmg`。
+2. 在 Finder 中打开 `/Users/Shared/BatteryHarbor-0.1-clean-test.dmg`。
 3. 将 `Battery Harbor.app` 拖入 `/Applications`。
 4. 从“应用程序”打开电池港。若被阻止，前往“系统设置 → 隐私与安全性”，点击“仍要打开”并再次确认。
 5. 确认菜单栏图标和主界面可以正常显示。
@@ -48,7 +48,7 @@ This test verifies that a new user without the maintainer's signing certificate 
 ### Install and Gatekeeper
 
 1. Sign in to a temporary macOS administrator account. Do not sign in with an Apple ID or import any development or release certificate.
-2. In Finder, open `/Users/Shared/BatteryHarbor-0.1.0-alpha.1-clean-test.dmg`.
+2. In Finder, open `/Users/Shared/BatteryHarbor-0.1-clean-test.dmg`.
 3. Drag `Battery Harbor.app` to `/Applications`.
 4. Open Battery Harbor from Applications. If macOS blocks it, go to System Settings > Privacy & Security, click Open Anyway, and confirm again.
 5. Confirm that the menu bar icon and main interface appear normally.

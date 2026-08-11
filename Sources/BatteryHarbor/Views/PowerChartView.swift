@@ -5,26 +5,25 @@ struct PowerChartView: View {
     @EnvironmentObject private var store: BatteryStore
 
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .leading, spacing: 14) {
-                HStack {
-                    VStack(alignment: .leading, spacing: 3) {
-                        Text("实时电池功率")
-                            .font(.headline)
-                        Text("每 2 秒采样 · 最近 6 分钟")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                    }
-                    Spacer()
-                    if let current = store.snapshot.powerWatts {
-                        Text(current.formatted(.number.precision(.fractionLength(2))) + " W")
-                            .font(.title3.weight(.semibold).monospacedDigit())
-                    }
+        VStack(alignment: .leading, spacing: 14) {
+            HStack {
+                VStack(alignment: .leading, spacing: 3) {
+                    Text("实时电池功率")
+                        .font(.headline)
+                    Text("每 2 秒读取 · 最近 6 分钟")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
+                Spacer()
+                if let current = store.snapshot.powerWatts {
+                    Text(current.formatted(.number.precision(.fractionLength(2))) + " W")
+                        .font(.title3.weight(.semibold).monospacedDigit())
+                }
+            }
 
-                powerFlow
+            powerFlow
 
-                Chart(store.samples) { sample in
+            Chart(chartSamples) { sample in
                     AreaMark(
                         x: .value("时间", sample.timestamp),
                         y: .value("功率", sample.watts)
@@ -42,7 +41,7 @@ struct PowerChartView: View {
                         y: .value("功率", sample.watts)
                     )
                     .foregroundStyle(HarborPalette.dataBlue)
-                    .interpolationMethod(.catmullRom)
+                    .interpolationMethod(.linear)
 
                     RuleMark(y: .value("零功率", 0))
                         .foregroundStyle(.secondary.opacity(0.4))
@@ -55,20 +54,36 @@ struct PowerChartView: View {
                         AxisValueLabel(format: .dateTime.minute().second())
                     }
                 }
-                .frame(height: 175)
+            .frame(height: 175)
 
-                HStack(spacing: 18) {
-                    Label("正值：充入电池", systemImage: "arrow.down.circle.fill")
-                        .foregroundStyle(HarborPalette.success)
-                    Label("负值：电池输出", systemImage: "arrow.up.circle.fill")
-                        .foregroundStyle(HarborPalette.warning)
-                }
-                .font(.caption)
+            HStack(spacing: 18) {
+                Label("正值：充入电池", systemImage: "arrow.down.circle.fill")
+                    .foregroundStyle(HarborPalette.success)
+                Label("负值：电池输出", systemImage: "arrow.up.circle.fill")
+                    .foregroundStyle(HarborPalette.warning)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 12)
+            .font(.caption)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .fixedSize(horizontal: false, vertical: true)
+    }
+
+    private var chartSamples: [PowerSample] {
+        let samples = store.samples
+        // Forty-eight points preserve the six-minute trend while reducing the
+        // number of marks, gradients and hit-test nodes rebuilt on each sample.
+        let maximumPoints = 48
+        guard samples.count > maximumPoints else { return samples }
+        let stride = max(1, Int(ceil(Double(samples.count) / Double(maximumPoints))))
+        var result = samples.enumerated().compactMap { index, sample in
+            index.isMultiple(of: stride) ? sample : nil
+        }
+        if let last = samples.last, result.last?.id != last.id {
+            result.append(last)
+        }
+        return result
     }
 
     private var powerFlow: some View {

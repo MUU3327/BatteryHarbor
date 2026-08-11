@@ -354,9 +354,11 @@ struct SettingsView: View {
                 .font(.caption)
                 .foregroundStyle(.secondary)
             Spacer()
-            Image(systemName: store.snapshot.menuBarSymbol)
-                .symbolRenderingMode(.palette)
-                .foregroundStyle(menuPreviewColor, menuPreviewColor.opacity(0.45))
+            HarborMenuBarBatteryIcon(
+                batterySymbol: store.menuBarBatterySymbol,
+                accessorySymbol: store.menuBarAccessorySymbol
+            )
+            .foregroundStyle(menuPreviewColor)
             Text(store.menuBarTitle)
                 .font(.caption.monospacedDigit())
                 .foregroundStyle(menuPreviewColor)

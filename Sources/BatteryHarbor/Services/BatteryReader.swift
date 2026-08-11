@@ -45,19 +45,31 @@ struct BatteryReader: BatteryReading {
 
         if let adapter = (registry["AdapterDetails"] as? [String: Any])
             ?? (registry["AppleRawAdapterDetails"] as? [[String: Any]])?.first {
-            snapshot.adapterRatedWatts = int(adapter["Watts"])
-            snapshot.adapterVoltageVolts = snapshot.adapterVoltageVolts
-                ?? int(adapter["AdapterVoltage"]).map { Double($0) / 1_000 }
-            if snapshot.adapterCurrentAmps == nil,
-               let input = snapshot.adapterInputWatts,
-               let voltage = snapshot.adapterVoltageVolts,
-               voltage > 0 {
-                snapshot.adapterCurrentAmps = input / voltage
-            }
+            applyAdapterDetails(adapter, to: &snapshot)
+        }
+
+        // IOPowerSources often publishes the negotiated adapter identity before
+        // AppleSmartBattery has refreshed its telemetry dictionary. Using this
+        // public API makes the newly connected/negotiating state visible sooner.
+        if snapshot.powerSource == .adapter,
+           let adapter = IOPSCopyExternalPowerAdapterDetails()?.takeRetainedValue() as? [String: Any] {
+            applyAdapterDetails(adapter, to: &snapshot)
         }
 
         snapshot.timestamp = Date()
         return snapshot
+    }
+
+    private func applyAdapterDetails(_ adapter: [String: Any], to snapshot: inout BatterySnapshot) {
+        snapshot.adapterRatedWatts = snapshot.adapterRatedWatts ?? int(adapter["Watts"])
+        snapshot.adapterVoltageVolts = snapshot.adapterVoltageVolts
+            ?? int(adapter["AdapterVoltage"]).map { Double($0) / 1_000 }
+        if snapshot.adapterCurrentAmps == nil,
+           let input = snapshot.adapterInputWatts,
+           let voltage = snapshot.adapterVoltageVolts,
+           voltage > 0 {
+            snapshot.adapterCurrentAmps = input / voltage
+        }
     }
 
     private func readPowerSourceDescription() -> BatterySnapshot {

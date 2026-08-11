@@ -9,7 +9,6 @@ enum DiagnosticReportBuilder {
         helperStatus: HelperRegistrationStatus,
         helperProbe: HelperProbePayload?,
         chargeLimit: Int,
-        automaticallyDischarges: Bool,
         highTemperatureProtectionEnabled: Bool,
         highTemperatureThreshold: Double,
         sleepProtectionEnabled: Bool,
@@ -59,7 +58,6 @@ enum DiagnosticReportBuilder {
         Helper: \(helperStatus.displayName)
         Helper 探测: \(probeText)
         上限: \(chargeLimit)%
-        自动放电: \(automaticallyDischarges)
         高温保护: \(highTemperatureProtectionEnabled), 阈值 \(Int(highTemperatureThreshold))°C
         睡眠保护: \(sleepProtectionEnabled)
         计划数量: \(scheduleCount)

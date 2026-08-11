@@ -11,12 +11,15 @@ struct BatteryHarborApp: App {
                 .environment(\.locale, store.interfaceLanguage.locale)
         } label: {
             HStack(spacing: 3) {
-                Image(systemName: store.snapshot.menuBarSymbol)
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(menuBarColor, menuBarColor.opacity(0.45))
+                HarborMenuBarBatteryIcon(
+                    batterySymbol: store.menuBarBatterySymbol,
+                    accessorySymbol: store.menuBarAccessorySymbol
+                )
                 Text(store.menuBarTitle)
                     .foregroundStyle(menuBarColor)
             }
+            .accessibilityElement(children: .ignore)
+            .accessibilityLabel(store.menuBarAccessibilityLabel)
         }
         .menuBarExtraStyle(.window)
 
@@ -64,6 +67,29 @@ struct BatteryHarborApp: App {
 
     private var menuBarColor: Color {
         .primary
+    }
+}
+
+struct HarborMenuBarBatteryIcon: View {
+    let batterySymbol: String
+    let accessorySymbol: String?
+
+    var body: some View {
+        ZStack(alignment: .bottomTrailing) {
+            Image(systemName: batterySymbol)
+                .symbolRenderingMode(.monochrome)
+                .font(.system(size: 15, weight: .regular))
+
+            if let accessorySymbol {
+                Image(systemName: accessorySymbol)
+                    .symbolRenderingMode(.monochrome)
+                    .font(.system(size: 7, weight: .bold))
+                    .padding(1.5)
+                    .background(.regularMaterial, in: Circle())
+                    .offset(x: 3, y: 3)
+            }
+        }
+        .frame(width: 21, height: 15)
     }
 }
 

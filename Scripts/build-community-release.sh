@@ -3,7 +3,7 @@
 set -euo pipefail
 
 PROJECT_ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-RELEASE_LABEL="${1:-0.1.0-alpha.2}"
+RELEASE_LABEL="${1:-0.2}"
 SIGNING_IDENTITY="${BATTERY_HARBOR_SIGNING_IDENTITY:-Battery Harbor Open Source Release}"
 OUTPUT_DIR="$PROJECT_ROOT/.build/releases"
 OUTPUT_BASENAME="BatteryHarbor-${RELEASE_LABEL}-macos-arm64-unnotarized"

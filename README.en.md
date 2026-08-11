@@ -4,7 +4,7 @@
 
 Battery Harbor is a clean-room, native macOS menu bar utility for battery care. It provides a configurable charge limit, charging pause, temporary full charge, power monitoring, per-app energy ranking, and scheduled actions.
 
-> Version `0.1.0-alpha.2` is a community technical preview. Its low-level charging controller writes to AppleSMC. Hardware control is intended only for users who understand and complete the built-in safety self-test on a test machine. Compatibility across Mac models and macOS releases is still being verified.
+> Version `0.2` is a community technical preview. Its low-level charging controller writes to AppleSMC. Hardware control is intended only for users who understand and complete the built-in safety self-test on a test machine. Compatibility across Mac models and macOS releases is still being verified.
 
 ## Project status
 
@@ -18,7 +18,7 @@ Battery Harbor is a clean-room, native macOS menu bar utility for battery care. 
 | Schedules and Shortcuts | Complete | Weekday/time schedules, execution log, and four App Intents |
 | Automatic protection | Complete | High-temperature pause, sleep pause, wake recovery, and background enforcement |
 | Automated tests | 39 unit tests passing | CI builds and tests without installing the Helper or writing to SMC |
-| Public release | `0.1.0-alpha.2` community technical preview | MIT licensed; the self-signed arm64 DMG passed static signature verification and clean-account testing with no Apple ID or maintainer certificate; no Developer ID notarized build is planned yet |
+| Public release | `0.2` community technical preview | MIT licensed; the self-signed arm64 DMG passed static signature verification and clean-account testing with no Apple ID or maintainer certificate; no Developer ID notarized build is planned yet |
 
 ## Features
 

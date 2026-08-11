@@ -16,7 +16,7 @@ struct PowerChartView: View {
                 }
                 Spacer()
                 if let current = store.snapshot.powerWatts {
-                    Text(current.formatted(.number.precision(.fractionLength(2))) + " W")
+                    Text(signedPowerText(current, fractionLength: 2))
                         .font(.title3.weight(.semibold).monospacedDigit())
                 }
             }
@@ -93,8 +93,8 @@ struct PowerChartView: View {
             } else {
                 HStack(spacing: 7) {
                     flowNode(
-                        title: L10n.text("电池输出"),
-                        value: watts(store.snapshot.powerWatts.map { abs($0) }),
+                        title: L10n.text("电池"),
+                        value: signedPowerText(store.snapshot.powerWatts, fractionLength: 2),
                         symbol: "battery.75percent",
                         color: HarborPalette.warning
                     )
@@ -117,9 +117,9 @@ struct PowerChartView: View {
         let system = max(store.snapshot.systemLoadWatts ?? 0, 0)
         let batterySigned = store.snapshot.powerWatts ?? 0
         let battery = abs(batterySigned)
-        let allocationTotal = max(input, system + max(batterySigned, 0), 0.01)
-        let systemFraction = min(max(system / allocationTotal, 0), 1)
-        let batteryFraction = min(max(max(batterySigned, 0) / allocationTotal, 0), 1)
+        let allocationTotal = max(batterySigned >= 0 ? input : system, 0.01)
+        let systemFraction = min(max((batterySigned >= 0 ? system : input) / allocationTotal, 0), 1)
+        let batteryFraction = min(max(battery / allocationTotal, 0), 1)
 
         return VStack(alignment: .leading, spacing: 9) {
             HStack {
@@ -163,8 +163,8 @@ struct PowerChartView: View {
                         color: HarborPalette.dataBlue
                     )
                     flowMetricNode(
-                        title: L10n.text(batterySigned < 0 ? "电池补充系统" : "充入电池"),
-                        value: watts(battery),
+                        title: L10n.text("电池"),
+                        value: signedPowerText(store.snapshot.powerWatts, fractionLength: 2),
                         symbol: "battery.75percent",
                         color: batterySigned < 0 ? HarborPalette.warning : HarborPalette.success,
                         isActive: battery > 0.01
@@ -176,12 +176,12 @@ struct PowerChartView: View {
 
             HStack(spacing: 14) {
                 allocationLabel(
-                    title: L10n.text("系统"),
+                    title: L10n.text(batterySigned < 0 ? "适配器" : "系统"),
                     fraction: systemFraction,
                     color: HarborPalette.dataBlue
                 )
                 allocationLabel(
-                    title: L10n.text(batterySigned < 0 ? "电池输出" : "电池"),
+                    title: L10n.text("电池"),
                     fraction: batteryFraction,
                     color: batterySigned < 0 ? HarborPalette.warning : HarborPalette.success
                 )

@@ -88,9 +88,21 @@ struct BatterySnapshot: Equatable, Sendable {
 
     var powerBalanceText: String? {
         guard let adapterInputWatts, let systemLoadWatts, let powerWatts else { return nil }
-        let difference = adapterInputWatts - systemLoadWatts - max(powerWatts, 0)
+        let difference = adapterInputWatts - systemLoadWatts - powerWatts
         return L10n.format("平衡误差 %@ W", abs(difference).formatted(.number.precision(.fractionLength(2))))
     }
+}
+
+func signedPowerText(_ value: Double?, fractionLength: Int) -> String {
+    guard let value else { return "— W" }
+    let threshold = 0.5 / pow(10, Double(fractionLength))
+    let normalized = abs(value) < threshold ? 0 : value
+    let magnitude = abs(normalized).formatted(
+        .number.precision(.fractionLength(fractionLength))
+    )
+    if normalized > 0 { return "+\(magnitude) W" }
+    if normalized < 0 { return "−\(magnitude) W" }
+    return "\(magnitude) W"
 }
 
 enum AdapterConnectionState: Equatable, Sendable {

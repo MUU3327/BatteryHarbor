@@ -16,7 +16,7 @@ struct GetBatteryStatusIntent: AppIntent {
             parts.append("温度 \(temperature.formatted(.number.precision(.fractionLength(1))))°C")
         }
         if let power = snapshot.powerWatts {
-            parts.append("功率 \(power.formatted(.number.precision(.fractionLength(1)))) W")
+            parts.append("功率 \(signedPowerText(power, fractionLength: 1))")
         }
         let status = parts.joined(separator: "，")
         return .result(value: status, dialog: IntentDialog(stringLiteral: status))

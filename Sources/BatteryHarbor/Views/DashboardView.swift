@@ -334,7 +334,7 @@ private struct TextFirstOverviewView: View {
     private var powerFlow: some View {
         let input = max(store.snapshot.adapterInputWatts ?? 0, 0)
         let system = max(store.snapshot.systemLoadWatts ?? 0, 0)
-        let battery = abs(store.snapshot.powerWatts ?? 0)
+        let battery = store.snapshot.powerWatts ?? 0
 
         return VStack(alignment: .leading, spacing: 10) {
             Text("功率流向")
@@ -345,12 +345,22 @@ private struct TextFirstOverviewView: View {
                 Divider().frame(height: 54)
                 powerMetric(title: "系统", value: system, symbol: "laptopcomputer")
                 Divider().frame(height: 54)
-                powerMetric(title: "电池", value: battery, symbol: nativeBatterySymbol)
+                powerMetric(
+                    title: "电池",
+                    value: battery,
+                    symbol: nativeBatterySymbol,
+                    usesSignedValue: true
+                )
             }
         }
     }
 
-    private func powerMetric(title: String, value: Double, symbol: String) -> some View {
+    private func powerMetric(
+        title: String,
+        value: Double,
+        symbol: String,
+        usesSignedValue: Bool = false
+    ) -> some View {
         VStack(spacing: 3) {
             Text(L10n.text(title))
                 .font(.caption)
@@ -358,7 +368,11 @@ private struct TextFirstOverviewView: View {
             Image(systemName: symbol)
                 .font(.system(size: 16, weight: .regular))
                 .frame(height: 19)
-            Text(value.formatted(.number.precision(.fractionLength(1))) + " W")
+            Text(
+                usesSignedValue
+                    ? signedPowerText(value, fractionLength: 1)
+                    : value.formatted(.number.precision(.fractionLength(1))) + " W"
+            )
                 .font(.subheadline.weight(.medium).monospacedDigit())
         }
         .frame(maxWidth: .infinity)
@@ -765,7 +779,7 @@ private struct OverviewView: View {
                 Divider().frame(height: 40)
                 dashboardMetric(
                     title: "功率",
-                    value: powerText(store.snapshot.powerWatts.map(abs)),
+                    value: signedPowerText(store.snapshot.powerWatts, fractionLength: 1),
                     symbol: "waveform.path.ecg"
                 )
                 Divider().frame(height: 40)
@@ -824,7 +838,8 @@ private struct OverviewView: View {
     private var powerAllocationCard: some View {
         let input = max(store.snapshot.adapterInputWatts ?? 0, 0)
         let system = max(store.snapshot.systemLoadWatts ?? 0, 0)
-        let battery = abs(store.snapshot.powerWatts ?? 0)
+        let batterySigned = store.snapshot.powerWatts ?? 0
+        let battery = abs(batterySigned)
         let maximum = max(input, system, battery, 1)
 
         return VStack(alignment: .leading, spacing: 8) {
@@ -846,6 +861,7 @@ private struct OverviewView: View {
                 DashboardPowerColumn(
                     title: "电池",
                     value: battery,
+                    displayValue: signedPowerText(batterySigned, fractionLength: 1),
                     maximum: maximum,
                     tint: (store.snapshot.powerWatts ?? 0) < 0
                         ? HarborPalette.warning
@@ -920,7 +936,7 @@ private struct OverviewView: View {
                 Divider().frame(height: 40)
                 dashboardMetric(
                     title: "功率",
-                    value: powerText(store.snapshot.powerWatts.map(abs)),
+                    value: signedPowerText(store.snapshot.powerWatts, fractionLength: 1),
                     symbol: "waveform.path.ecg"
                 )
                 Divider().frame(height: 40)
@@ -1044,10 +1060,6 @@ private struct OverviewView: View {
         } ?? "— V"
     }
 
-    private func powerText(_ value: Double?) -> String {
-        value.map { abs($0).formatted(.number.precision(.fractionLength(1))) + " W" } ?? "— W"
-    }
-
     private var temperatureText: String {
         store.snapshot.temperatureCelsius.map {
             $0.formatted(.number.precision(.fractionLength(1))) + "°C"
@@ -1101,6 +1113,7 @@ private struct OverviewView: View {
 private struct DashboardPowerColumn: View {
     let title: String
     let value: Double
+    var displayValue: String? = nil
     let maximum: Double
     let tint: Color
 
@@ -1109,7 +1122,7 @@ private struct DashboardPowerColumn: View {
             Text(L10n.text(title))
                 .font(.system(size: 9, weight: .medium))
                 .foregroundStyle(.secondary)
-            Text(value.formatted(.number.precision(.fractionLength(1))) + " W")
+            Text(displayValue ?? value.formatted(.number.precision(.fractionLength(1))) + " W")
                 .font(.caption2.weight(.semibold).monospacedDigit())
                 .lineLimit(1)
                 .minimumScaleFactor(0.65)

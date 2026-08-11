@@ -104,6 +104,27 @@ final class BatteryReaderTests: XCTestCase {
         XCTAssertEqual(signedInt(NSNumber(value: 2_500)), 2_500)
     }
 
+    func testBatteryTelemetryKeepsPositiveChargingPower() throws {
+        let value = try XCTUnwrap(milliwatts(NSNumber(value: 25_563)))
+        XCTAssertEqual(value, 25.563, accuracy: 0.0001)
+    }
+
+    func testBatteryTelemetryKeepsNegativeDischargingPower() throws {
+        let rawDischargingPower = NSNumber(value: UInt64(bitPattern: Int64(-7_500)))
+        let value = try XCTUnwrap(milliwatts(rawDischargingPower))
+        XCTAssertEqual(
+            value,
+            -7.5,
+            accuracy: 0.0001
+        )
+    }
+
+    func testSignedPowerTextMakesDirectionExplicit() {
+        XCTAssertEqual(signedPowerText(12.54, fractionLength: 2), "+12.54 W")
+        XCTAssertEqual(signedPowerText(-12.54, fractionLength: 2), "−12.54 W")
+        XCTAssertEqual(signedPowerText(0, fractionLength: 2), "0.00 W")
+    }
+
     func testSnapshotStateTextDistinguishesAdapterWithoutCharging() {
         let snapshot = BatterySnapshot(
             percentage: 80,

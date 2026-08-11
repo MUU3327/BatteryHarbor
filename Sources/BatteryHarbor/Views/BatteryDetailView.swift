@@ -44,7 +44,10 @@ struct BatteryDetailView: View {
                     detail("适配器输入电压", format(store.snapshot.adapterVoltageVolts, suffix: " V", digits: 2))
                     detail("适配器输入电流", format(store.snapshot.adapterCurrentAmps, suffix: " A", digits: 2))
                     detail("系统使用", format(store.snapshot.systemLoadWatts, suffix: " W", digits: 2))
-                    detail("电池功率", format(store.snapshot.powerWatts, suffix: " W", digits: 2))
+                    detail(
+                        "电池功率",
+                        signedPowerText(store.snapshot.powerWatts, fractionLength: 2)
+                    )
                     detail("适配器损耗", format(store.snapshot.adapterEfficiencyLossWatts, suffix: " W", digits: 2))
                     detail("适配器额定功率", store.snapshot.adapterRatedWatts.map { "\($0) W" } ?? "—")
                 }

@@ -269,9 +269,7 @@ final class BatteryStore: ObservableObject {
     var menuBarTitle: String {
         guard snapshot.isPresent else { return "--" }
         let percentage = "\(snapshot.percentage)%"
-        let power = snapshot.powerWatts.map {
-            abs($0).formatted(.number.precision(.fractionLength(1))) + " W"
-        } ?? "— W"
+        let power = signedPowerText(snapshot.powerWatts, fractionLength: 1)
         switch menuBarDisplayMode {
         case .percentage: return percentage
         case .power: return power

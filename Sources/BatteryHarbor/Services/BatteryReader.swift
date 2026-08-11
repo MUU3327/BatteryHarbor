@@ -31,11 +31,14 @@ struct BatteryReader: BatteryReading {
         }
 
         if let telemetry = registry["PowerTelemetryData"] as? [String: Any] {
-            snapshot.powerWatts = signedInt(telemetry["BatteryPower"]).map { Double($0) / 1_000 }
-            snapshot.adapterInputWatts = signedInt(telemetry["SystemPowerIn"]).map { Double($0) / 1_000 }
+            // BatteryPower already follows the app's user-facing convention:
+            // +W enters the battery and -W leaves it. SystemPowerIn,
+            // SystemLoad and BatteryPower also satisfy input = system + battery.
+            snapshot.powerWatts = milliwatts(telemetry["BatteryPower"])
+            snapshot.adapterInputWatts = milliwatts(telemetry["SystemPowerIn"])
             snapshot.adapterVoltageVolts = int(telemetry["SystemVoltageIn"]).map { Double($0) / 1_000 }
             snapshot.adapterCurrentAmps = signedInt(telemetry["SystemCurrentIn"]).map { Double($0) / 1_000 }
-            snapshot.systemLoadWatts = signedInt(telemetry["SystemLoad"]).map { Double($0) / 1_000 }
+            snapshot.systemLoadWatts = milliwatts(telemetry["SystemLoad"]).map { max($0, 0) }
             snapshot.adapterEfficiencyLossWatts = signedInt(telemetry["AdapterEfficiencyLoss"])
                 .map { Double($0) / 1_000 }
         } else if let voltage = snapshot.voltageVolts,
@@ -134,6 +137,10 @@ func int(_ value: Any?) -> Int? {
 func signedInt(_ value: Any?) -> Int? {
     guard let number = value as? NSNumber else { return int(value) }
     return Int(Int64(bitPattern: number.uint64Value))
+}
+
+func milliwatts(_ value: Any?) -> Double? {
+    signedInt(value).map { Double($0) / 1_000 }
 }
 
 func bool(_ value: Any?) -> Bool? {

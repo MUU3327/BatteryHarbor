@@ -45,7 +45,7 @@ enum DiagnosticReportBuilder {
         状态: \(snapshot.stateText)
         电源: \(snapshot.powerSource.displayName)
         温度: \(value(snapshot.temperatureCelsius)) °C
-        电池功率: \(value(snapshot.powerWatts)) W
+        电池功率: \(signedPowerText(snapshot.powerWatts, fractionLength: 2))
         适配器输入: \(value(snapshot.adapterInputWatts)) W
         适配器电压: \(value(snapshot.adapterVoltageVolts)) V
         适配器电流: \(value(snapshot.adapterCurrentAmps)) A

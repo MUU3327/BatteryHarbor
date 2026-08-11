@@ -4,12 +4,11 @@
 
 ## 安装
 
-1. 从项目官方 GitHub Releases 下载带有 `unnotarized` 的 DMG 和对应 `.sha256` 文件。
-2. 在终端运行 `shasum -a 256 <DMG 路径>`，确认结果与发布页一致。
-3. 打开 DMG，将 `Battery Harbor.app` 拖入 `Applications`。
-4. 第一次尝试打开电池港。macOS 会因为构建未经 Apple 公证而阻止启动。
-5. 前往“系统设置 → 隐私与安全性”，在“安全性”区域点击“仍要打开”。
-6. 再次确认打开电池港。
+1. 从项目官方 GitHub Releases 下载带有 `unnotarized` 的 DMG。
+2. 打开 DMG，将 `Battery Harbor.app` 拖入 `Applications`。
+3. 第一次尝试打开电池港。macOS 会因为构建未经 Apple 公证而阻止启动。
+4. 前往“系统设置 → 隐私与安全性”，在“安全性”区域点击“仍要打开”。
+5. 再次确认打开电池港。
 
 不要全局关闭 Gatekeeper，不要关闭 SIP，也不要运行来源不明的 `sudo` 安装命令。
 

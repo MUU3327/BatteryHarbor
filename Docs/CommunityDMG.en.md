@@ -4,12 +4,11 @@ The Battery Harbor community DMG is a self-signed early-testing build that is no
 
 ## Install
 
-1. Download the DMG containing `unnotarized` and its `.sha256` file from the official GitHub Releases page.
-2. Run `shasum -a 256 <path-to-DMG>` and compare the result with the release page.
-3. Open the DMG and drag `Battery Harbor.app` to `Applications`.
-4. Try to open Battery Harbor once. macOS will block the build because it is not notarized by Apple.
-5. Open System Settings, select Privacy & Security, and click Open Anyway in the Security section.
-6. Confirm that you want to open Battery Harbor.
+1. Download the DMG containing `unnotarized` from the official GitHub Releases page.
+2. Open the DMG and drag `Battery Harbor.app` to `Applications`.
+3. Try to open Battery Harbor once. macOS will block the build because it is not notarized by Apple.
+4. Open System Settings, select Privacy & Security, and click Open Anyway in the Security section.
+5. Confirm that you want to open Battery Harbor.
 
 Do not disable Gatekeeper globally, disable SIP, or run untrusted `sudo` installation commands.
 

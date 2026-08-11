@@ -8,8 +8,6 @@ SIGNING_IDENTITY="${BATTERY_HARBOR_SIGNING_IDENTITY:-Battery Harbor Open Source 
 OUTPUT_DIR="$PROJECT_ROOT/.build/releases"
 OUTPUT_BASENAME="BatteryHarbor-${RELEASE_LABEL}-macos-arm64-unnotarized"
 DMG_PATH="$OUTPUT_DIR/$OUTPUT_BASENAME.dmg"
-CHECKSUM_PATH="$DMG_PATH.sha256"
-MANIFEST_PATH="$OUTPUT_DIR/$OUTPUT_BASENAME.txt"
 TEMP_ROOT="$(mktemp -d "${TMPDIR:-/tmp}/battery-harbor-release.XXXXXX")"
 
 cleanup() {
@@ -17,7 +15,7 @@ cleanup() {
 }
 trap cleanup EXIT
 
-if [[ -e "$DMG_PATH" || -e "$CHECKSUM_PATH" || -e "$MANIFEST_PATH" ]]; then
+if [[ -e "$DMG_PATH" ]]; then
     echo "Release output already exists: $OUTPUT_BASENAME" >&2
     echo "Move the existing files out of $OUTPUT_DIR before rebuilding." >&2
     exit 1
@@ -86,7 +84,7 @@ cat > "$STAGING_DIR/安装前必读.txt" <<'EOF'
 3. 在电池港“设置 → 充电”中注册控制模块，并在登录项设置中批准。
 4. 必须完成内置写入、回读和原值恢复安全自检后，才可启用充电控制。
 
-请只从项目官方 GitHub Releases 下载，并核对 SHA-256。
+请只从项目官方 GitHub Releases 下载。
 不要关闭 Gatekeeper 或 SIP，不要跳过安全自检。
 EOF
 
@@ -97,20 +95,5 @@ hdiutil create \
     -format UDZO \
     "$DMG_PATH"
 
-shasum -a 256 "$DMG_PATH" > "$CHECKSUM_PATH"
-cat > "$MANIFEST_PATH" <<EOF
-Release: $RELEASE_LABEL
-Architecture: arm64
-Bundle ID: $APP_IDENTIFIER
-Helper ID: $HELPER_IDENTIFIER
-Signing identity: $SIGNING_IDENTITY
-Leaf certificate SHA-256: $APP_CERT_SHA256
-Apple notarization: no
-DMG: $(basename "$DMG_PATH")
-DMG SHA-256: $(awk '{print $1}' "$CHECKSUM_PATH")
-EOF
-
 echo "Community release created:"
 echo "  $DMG_PATH"
-echo "  $CHECKSUM_PATH"
-echo "  $MANIFEST_PATH"

@@ -78,6 +78,12 @@ final class BatteryReaderTests: XCTestCase {
             powerSource: .adapter
         )
         XCTAssertEqual(L10n.text("概览"), "Overview")
+        XCTAssertEqual(L10n.text("功率分配"), "Power Allocation")
+        XCTAssertEqual(L10n.text("充电控制"), "Charging Control")
+        XCTAssertEqual(L10n.text("当前电量"), "Current Level")
+        XCTAssertEqual(L10n.text("充电上限目标"), "Charge Limit Target")
+        XCTAssertEqual(L10n.text("停止向电池充电"), "Stop charging the battery")
+        XCTAssertEqual(L10n.text("临时调整到 100%"), "Temporarily charge to 100%")
         XCTAssertEqual(SettingsSection.charging.displayName, "Charging")
         XCTAssertEqual(MenuBarDisplayMode.power.displayName, "Power")
         XCTAssertEqual(snapshot.stateText, "Connected to Power, Not Charging")
@@ -196,6 +202,40 @@ final class BatteryReaderTests: XCTestCase {
         XCTAssertTrue(csv.contains("\"示例, \"\"App\"\"\""))
     }
 
+    func testEnergySamplingDoesNotScanProcessesWhenOverviewOpens() {
+        let now = Date(timeIntervalSince1970: 10_000)
+        XCTAssertFalse(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: nil,
+            selectedSection: .overview,
+            now: now
+        ))
+        XCTAssertTrue(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: nil,
+            selectedSection: .apps,
+            now: now
+        ))
+        XCTAssertFalse(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: now.addingTimeInterval(-29),
+            selectedSection: .apps,
+            now: now
+        ))
+        XCTAssertTrue(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: now.addingTimeInterval(-30),
+            selectedSection: .apps,
+            now: now
+        ))
+        XCTAssertFalse(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: now.addingTimeInterval(-599),
+            selectedSection: .overview,
+            now: now
+        ))
+        XCTAssertTrue(EnergySamplingPolicy.shouldSample(
+            lastSampleAt: now.addingTimeInterval(-600),
+            selectedSection: .overview,
+            now: now
+        ))
+    }
+
     func testSMCStructMatchesKernelABI() {
         XCTAssertEqual(MemoryLayout<SMCParamStruct>.stride, 80)
         XCTAssertEqual(MemoryLayout<SMCParamStruct>.offset(of: \.keyInfo), 28)
@@ -225,16 +265,11 @@ final class BatteryReaderTests: XCTestCase {
         )
     }
 
-    func testChargePolicyDischargesAboveLimitInSafeOrder() {
-        let input = policyInput(
-            percentage: 85,
-            charging: true,
-            discharging: false,
-            automaticallyDischarges: true
-        )
+    func testChargePolicyStopsWithoutForceDischargingAboveLimit() {
+        let input = policyInput(percentage: 85, charging: true)
         XCTAssertEqual(
             ChargePolicy().actions(for: input),
-            [.disableCharging, .enableForceDischarge]
+            [.disableCharging]
         )
     }
 
@@ -276,7 +311,6 @@ final class BatteryReaderTests: XCTestCase {
             upperLimit: 80,
             lowerLimitDelta: 3,
             isPaused: true,
-            automaticallyDischarges: true,
             temporaryFullChargeUntil: now.addingTimeInterval(3_600),
             now: now
         )
@@ -349,7 +383,6 @@ final class BatteryReaderTests: XCTestCase {
             upperLimit: input.upperLimit,
             lowerLimitDelta: input.lowerLimitDelta,
             isPaused: input.isPaused,
-            automaticallyDischarges: input.automaticallyDischarges,
             temporaryFullChargeUntil: input.temporaryFullChargeUntil,
             now: input.now
         )
@@ -443,7 +476,6 @@ final class BatteryReaderTests: XCTestCase {
             helperStatus: .notRegistered,
             helperProbe: nil,
             chargeLimit: 80,
-            automaticallyDischarges: false,
             highTemperatureProtectionEnabled: true,
             highTemperatureThreshold: 38,
             sleepProtectionEnabled: true,
@@ -493,11 +525,107 @@ final class BatteryReaderTests: XCTestCase {
         XCTAssertEqual(schedule.chargeLimit, 50)
     }
 
+    func testNativeBatteryLevelSymbolUsesNearestQuarter() {
+        XCTAssertEqual(BatterySnapshot(percentage: 5, isPresent: true).nativeBatteryLevelSymbol, "battery.0percent")
+        XCTAssertEqual(BatterySnapshot(percentage: 25, isPresent: true).nativeBatteryLevelSymbol, "battery.25percent")
+        XCTAssertEqual(BatterySnapshot(percentage: 52, isPresent: true).nativeBatteryLevelSymbol, "battery.50percent")
+        XCTAssertEqual(BatterySnapshot(percentage: 76, isPresent: true).nativeBatteryLevelSymbol, "battery.75percent")
+        XCTAssertEqual(BatterySnapshot(percentage: 96, isPresent: true).nativeBatteryLevelSymbol, "battery.100percent")
+    }
+
+    func testChargingFlowUsesNativeBatteryBoltSymbol() {
+        XCTAssertEqual(
+            BatteryFlowState.charging.menuBarBatterySymbol(levelSymbol: "battery.75percent"),
+            "battery.100percent.bolt"
+        )
+        XCTAssertEqual(
+            BatteryFlowState.temporaryCharging.menuBarBatterySymbol(levelSymbol: "battery.50percent"),
+            "battery.100percent.bolt"
+        )
+        XCTAssertNil(BatteryFlowState.charging.menuBarAccessorySymbol)
+        XCTAssertEqual(
+            BatteryFlowState.reachedLimit.menuBarBatterySymbol(levelSymbol: "battery.75percent"),
+            "battery.75percent"
+        )
+    }
+
+    func testChargingAnalyzerSeparatesDisconnectedPowerPath() {
+        let status = analyze(BatterySnapshot(
+            percentage: 72,
+            isPresent: true,
+            powerSource: .battery,
+            powerWatts: -6
+        ))
+        XCTAssertEqual(status.connection, .disconnected)
+        XCTAssertEqual(status.negotiation, .notApplicable)
+        XCTAssertEqual(status.systemSupply, .battery)
+        XCTAssertEqual(status.batteryFlow, .discharging)
+    }
+
+    func testChargingAnalyzerReportsNegotiationBeforeTelemetryArrives() {
+        let status = analyze(BatterySnapshot(
+            percentage: 72,
+            isPresent: true,
+            powerSource: .adapter,
+            powerWatts: 0
+        ))
+        XCTAssertEqual(status.connection, .connected)
+        XCTAssertEqual(status.negotiation, .waiting)
+        XCTAssertEqual(status.systemSupply, .transitioning)
+        XCTAssertEqual(status.batteryFlow, .heldBySystem)
+    }
+
+    func testChargingAnalyzerDistinguishesManualPauseAndLimitHold() {
+        let snapshot = BatterySnapshot(
+            percentage: 85,
+            isPresent: true,
+            powerSource: .adapter,
+            powerWatts: 0,
+            adapterInputWatts: 8
+        )
+        XCTAssertEqual(analyze(snapshot, isPaused: true).batteryFlow, .pausedManually)
+        XCTAssertEqual(analyze(snapshot, targetLimit: 85).batteryFlow, .reachedLimit)
+    }
+
+    func testChargingAnalyzerWarnsAboutLowPowerAwayFromTarget() {
+        let snapshot = BatterySnapshot(
+            percentage: 55,
+            isCharging: true,
+            isPresent: true,
+            powerSource: .adapter,
+            powerWatts: 2,
+            adapterInputWatts: 25,
+            adapterRatedWatts: 67
+        )
+        let status = analyze(snapshot, targetLimit: 85)
+        XCTAssertEqual(status.batteryFlow, .charging)
+        XCTAssertEqual(status.diagnostic.level, .warning)
+    }
+
+    private func analyze(
+        _ snapshot: BatterySnapshot,
+        targetLimit: Int = 80,
+        chargingAllowed: Bool? = true,
+        forceDischargeEnabled: Bool? = false,
+        isPaused: Bool = false
+    ) -> ChargingPathStatus {
+        ChargingStateAnalyzer.status(
+            snapshot: snapshot,
+            targetLimit: targetLimit,
+            chargingAllowed: chargingAllowed,
+            forceDischargeEnabled: forceDischargeEnabled,
+            isManuallyPaused: isPaused,
+            isTemporaryFullChargeActive: false,
+            isTemperatureProtectionActive: false,
+            isSystemSleeping: false,
+            isControlAvailable: true
+        )
+    }
+
     private func policyInput(
         percentage: Int,
         charging: Bool?,
-        discharging: Bool? = false,
-        automaticallyDischarges: Bool = false
+        discharging: Bool? = false
     ) -> ChargePolicyInput {
         ChargePolicyInput(
             percentage: percentage,
@@ -507,7 +635,6 @@ final class BatteryReaderTests: XCTestCase {
             upperLimit: 80,
             lowerLimitDelta: 3,
             isPaused: false,
-            automaticallyDischarges: automaticallyDischarges,
             temporaryFullChargeUntil: nil,
             now: Date(timeIntervalSince1970: 1_000)
         )

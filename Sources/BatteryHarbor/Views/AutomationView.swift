@@ -6,59 +6,58 @@ struct AutomationView: View {
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(spacing: 12) {
-                HStack {
-                    HStack(spacing: 7) {
-                        Image("HarborScheduleMark")
-                            .resizable()
-                            .renderingMode(.template)
-                            .scaledToFit()
-                            .foregroundStyle(HarborPalette.accent)
-                            .frame(width: 18, height: 18)
-                        Text("计划任务")
-                    }
-                    .font(.headline)
-                    Spacer()
-                    Button {
-                        openWindow(id: "schedule-logs")
-                    } label: {
-                        Label("日志", systemImage: "list.bullet.rectangle")
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    Button {
-                        store.beginCreatingSchedule()
-                        openWindow(id: "schedule-editor")
-                    } label: {
-                        Label("新增", systemImage: "plus")
-                    }
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
+        VStack(spacing: 12) {
+            HStack {
+                HStack(spacing: 7) {
+                    Image("HarborScheduleMark")
+                        .resizable()
+                        .renderingMode(.template)
+                        .scaledToFit()
+                        .foregroundStyle(HarborPalette.accent)
+                        .frame(width: 18, height: 18)
+                    Text("计划任务")
                 }
-
-                calibrationCard
-
-                if store.schedules.isEmpty {
-                    emptyState
-                } else {
-                    LazyVStack(spacing: 9) {
-                        ForEach(store.schedules) { schedule in
-                            ScheduleRow(schedule: schedule)
-                                .environmentObject(store)
-                        }
-                    }
+                .font(.headline)
+                Spacer()
+                Button {
+                    openWindow(id: "schedule-logs")
+                } label: {
+                    Label("日志", systemImage: "list.bullet.rectangle")
                 }
-
-                Text("计划仅在电池港运行时检查；所有动作仍受 Helper 和人工确认闸门保护。")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                .buttonStyle(.bordered)
+                .controlSize(.small)
+                Button {
+                    store.beginCreatingSchedule()
+                    openWindow(id: "schedule-editor")
+                } label: {
+                    Label("新增", systemImage: "plus")
+                }
+                .buttonStyle(.bordered)
+                .controlSize(.small)
             }
-            .frame(maxWidth: .infinity)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 12)
+
+            calibrationCard
+
+            if store.schedules.isEmpty {
+                emptyState
+            } else {
+                LazyVStack(spacing: 9) {
+                    ForEach(store.schedules) { schedule in
+                        ScheduleRow(schedule: schedule)
+                            .environmentObject(store)
+                    }
+                }
+            }
+
+            Text("计划仅在电池港运行时检查；所有动作仍受 Helper 和人工确认闸门保护。")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+                .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private var calibrationCard: some View {

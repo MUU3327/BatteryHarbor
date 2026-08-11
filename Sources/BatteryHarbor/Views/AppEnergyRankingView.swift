@@ -6,66 +6,65 @@ struct AppEnergyRankingView: View {
     @State private var range: EnergyRankingRange = .current
 
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .leading, spacing: 12) {
-                HStack {
-                    HStack(spacing: 9) {
-                        Image("HarborAppMark")
-                            .resizable()
-                            .renderingMode(.template)
-                            .scaledToFit()
-                            .foregroundStyle(HarborPalette.accent)
-                            .frame(width: 20, height: 20)
-                        VStack(alignment: .leading, spacing: 3) {
-                            Text(L10n.text(range == .current ? "当前耗电 App" : "耗电历史排行"))
-                                .font(.headline)
-                            Text(range.subtitle)
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                    Spacer()
-                    if store.isEnergyRankingSampling {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                }
-
-                Picker("统计范围", selection: $range) {
-                    ForEach(EnergyRankingRange.allCases) { range in
-                        Text(range.title).tag(range)
-                    }
-                }
-                .pickerStyle(.segmented)
-
-                if displayedRanking.isEmpty {
-                    VStack(spacing: 10) {
-                        Image(systemName: "bolt.horizontal.circle")
-                            .font(.system(size: 34))
-                            .foregroundStyle(.secondary)
-                        Text(L10n.text(range == .current ? "正在建立基线" : "还没有足够的历史数据"))
+        VStack(alignment: .leading, spacing: 12) {
+            HStack {
+                HStack(spacing: 9) {
+                    Image("HarborAppMark")
+                        .resizable()
+                        .renderingMode(.template)
+                        .scaledToFit()
+                        .foregroundStyle(HarborPalette.accent)
+                        .frame(width: 20, height: 20)
+                    VStack(alignment: .leading, spacing: 3) {
+                        Text(L10n.text(range == .current ? "当前耗电 App" : "耗电历史排行"))
                             .font(.headline)
-                        Text(L10n.text(range == .current ? "保持面板打开约 5–10 秒即可看到排行。" : "电池港运行时会每 30 秒保存一次，最多保留 24 小时。"))
+                        Text(range.subtitle)
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
-                    .frame(maxWidth: .infinity, minHeight: 240)
-                } else {
-                    LazyVStack(spacing: 8) {
-                        ForEach(Array(displayedRanking.enumerated()), id: \.element.id) { index, usage in
-                            energyRow(index: index, usage: usage)
-                        }
+                }
+                Spacer()
+                if store.isEnergyRankingSampling {
+                    ProgressView()
+                        .controlSize(.small)
+                }
+            }
+
+            Picker("统计范围", selection: $range) {
+                ForEach(EnergyRankingRange.allCases) { range in
+                    Text(range.title).tag(range)
+                }
+            }
+            .pickerStyle(.segmented)
+
+            if displayedRanking.isEmpty {
+                VStack(spacing: 10) {
+                    Image(systemName: "bolt.horizontal.circle")
+                        .font(.system(size: 34))
+                        .foregroundStyle(.secondary)
+                    Text(L10n.text(range == .current ? "正在建立基线" : "还没有足够的历史数据"))
+                        .font(.headline)
+                    Text(L10n.text(range == .current ? "保持面板打开约 5–10 秒即可看到排行。" : "电池港运行时会每 30 秒保存一次，最多保留 24 小时。"))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                .frame(maxWidth: .infinity, minHeight: 240)
+            } else {
+                LazyVStack(spacing: 8) {
+                    ForEach(Array(displayedRanking.enumerated()), id: \.element.id) { index, usage in
+                        energyRow(index: index, usage: usage)
                     }
                 }
-
-                Text("排行聚合同一 App 的辅助进程；历史数据保存在本机，数值用于相对比较。")
-                    .font(.caption2)
-                    .foregroundStyle(.tertiary)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding(.horizontal, 16)
-            .padding(.bottom, 12)
+
+            Text("排行聚合同一 App 的辅助进程；历史数据保存在本机，数值用于相对比较。")
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
         }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 16)
+        .padding(.bottom, 12)
+        .fixedSize(horizontal: false, vertical: true)
     }
 
     private var displayedRanking: [AppEnergyUsage] {
@@ -80,7 +79,7 @@ struct AppEnergyRankingView: View {
                 .foregroundStyle(.secondary)
                 .frame(width: 16)
 
-            Image(nsImage: NSWorkspace.shared.icon(forFile: usage.bundlePath))
+            Image(nsImage: AppIconCache.icon(for: usage.bundlePath))
                 .resizable()
                 .frame(width: 30, height: 30)
 
@@ -132,7 +131,7 @@ private enum EnergyRankingRange: String, CaseIterable, Identifiable {
 
     var subtitle: String {
         switch self {
-        case .current: L10n.text("按最近 5 秒的公开进程能耗数据估算")
+        case .current: L10n.text("按最近 15 秒的公开进程能耗数据估算")
         case .oneHour: L10n.text("过去 1 小时的本机累计采样")
         case .twentyFourHours: L10n.text("过去 24 小时的本机累计采样")
         }
@@ -144,5 +143,18 @@ private enum EnergyRankingRange: String, CaseIterable, Identifiable {
         case .oneHour: 60 * 60
         case .twentyFourHours: 24 * 60 * 60
         }
+    }
+}
+
+@MainActor
+private enum AppIconCache {
+    private static let images = NSCache<NSString, NSImage>()
+
+    static func icon(for path: String) -> NSImage {
+        let key = path as NSString
+        if let cached = images.object(forKey: key) { return cached }
+        let image = NSWorkspace.shared.icon(forFile: path)
+        images.setObject(image, forKey: key)
+        return image
     }
 }

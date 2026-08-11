@@ -2,10 +2,10 @@ import AppKit
 import SwiftUI
 
 struct DashboardView: View {
-    @EnvironmentObject private var store: BatteryStore
     @Environment(\.openWindow) private var openWindow
     @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var navigationDirection: NavigationDirection = .forward
+    @State private var selectedSection: DashboardSection = .overview
     @State private var visibleSection: DashboardSection = .overview
     @State private var outgoingSection: DashboardSection?
     @State private var incomingSection: DashboardSection?
@@ -15,58 +15,42 @@ struct DashboardView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            header
-            Picker("页面", selection: sectionSelection) {
-                ForEach(DashboardSection.allCases) { section in
-                    Label(section.displayName, image: section.iconAssetName)
-                        .tag(section)
-                }
-            }
-            .pickerStyle(.segmented)
-            .id(store.interfaceLanguage.rawValue)
-            .labelsHidden()
-            .accessibilityLabel("页面")
-            .disabled(isSectionTransitioning)
-            .padding(3)
-            .harborGlassCard(
-                cornerRadius: 10,
-                tint: HarborPalette.accent.opacity(0.12),
-                interactive: true
+            DashboardSectionPicker(
+                selection: selectedSection,
+                isDisabled: isSectionTransitioning,
+                onSelect: beginSectionTransition
             )
-            .padding(.horizontal, 16)
-            .padding(.bottom, 12)
 
-            GeometryReader { proxy in
-                ZStack(alignment: .top) {
-                    if let outgoingSection, let incomingSection, isSectionTransitioning {
-                        sectionContent(outgoingSection)
-                            .offset(x: outgoingOffset(width: proxy.size.width))
-                            .opacity(1 - transitionProgress)
-                        sectionContent(incomingSection)
-                            .offset(x: incomingOffset(width: proxy.size.width))
-                            .opacity(transitionProgress)
-                    } else {
-                        sectionContent(visibleSection)
-                    }
+            ZStack(alignment: .top) {
+                if let outgoingSection, let incomingSection, isSectionTransitioning {
+                    sectionContent(outgoingSection)
+                        .offset(x: outgoingOffset(width: Self.dashboardWidth))
+                        .opacity(1 - transitionProgress)
+                    sectionContent(incomingSection)
+                        .offset(x: incomingOffset(width: Self.dashboardWidth))
+                        .opacity(transitionProgress)
+                } else {
+                    sectionContent(visibleSection)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-                .clipped()
             }
-            .environmentObject(store)
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            .frame(
+                width: Self.dashboardWidth,
+                height: Self.contentHeight,
+                alignment: .top
+            )
+            .clipped()
 
             Divider()
             footer
         }
-        .frame(width: 390, height: 540)
+        .frame(
+            width: Self.dashboardWidth,
+            height: Self.dashboardHeight,
+            alignment: .top
+        )
         .background { HarborRootBackground() }
-        .onAppear {
-            guard !isSectionTransitioning else { return }
-            visibleSection = store.selectedSection
-        }
         .onDisappear {
             sectionTransitionTask?.cancel()
-            visibleSection = store.selectedSection
             outgoingSection = nil
             incomingSection = nil
             transitionProgress = 1
@@ -74,27 +58,38 @@ struct DashboardView: View {
         }
     }
 
-    private var sectionSelection: Binding<DashboardSection> {
-        Binding(
-            get: { store.selectedSection },
-            set: { newSection in
-                beginSectionTransition(to: newSection)
-            }
-        )
-    }
+    private static let dashboardWidth: CGFloat = 390
+    // Keep the menu close to the compact Alpha 1 footprint. Every section
+    // scrolls inside this stable viewport instead of growing the menu window.
+    private static let dashboardHeight: CGFloat = 550
+    // The standalone brand row was removed, so its 48 points now belong to
+    // the content viewport without increasing the overall menu height.
+    private static let contentHeight: CGFloat = 467
 
     @ViewBuilder
     private func sectionContent(_ section: DashboardSection) -> some View {
         switch section {
-        case .overview: OverviewView()
-        case .power: PowerChartView()
-        case .apps: AppEnergyRankingView()
-        case .automation: AutomationView()
+        case .overview: TextFirstOverviewView()
+        case .power:
+            ScrollView {
+                PowerChartView()
+                    .padding(.top, 12)
+            }
+        case .apps:
+            ScrollView {
+                AppEnergyRankingView()
+                    .padding(.top, 12)
+            }
+        case .automation:
+            ScrollView {
+                AutomationView()
+                    .padding(.top, 12)
+            }
         }
     }
 
     private func beginSectionTransition(to newSection: DashboardSection) {
-        guard newSection != store.selectedSection, !isSectionTransitioning else { return }
+        guard newSection != visibleSection, !isSectionTransitioning else { return }
 
         sectionTransitionTask?.cancel()
         navigationDirection = circularDirection(from: visibleSection, to: newSection)
@@ -102,7 +97,7 @@ struct DashboardView: View {
         incomingSection = newSection
         transitionProgress = 0
         isSectionTransitioning = true
-        store.selectedSection = newSection
+        selectedSection = newSection
 
         let duration = reduceMotion ? 0.16 : 0.28
         sectionTransitionTask = Task { @MainActor in
@@ -146,51 +141,6 @@ struct DashboardView: View {
         return direction * width * (1 - transitionProgress)
     }
 
-    private var header: some View {
-        HStack(spacing: 13) {
-            ZStack {
-                Circle()
-                    .stroke(HarborPalette.accent.opacity(0.13), lineWidth: 5)
-                Circle()
-                    .trim(from: 0, to: max(0.025, Double(store.snapshot.percentage) / 100))
-                    .stroke(
-                        HarborPalette.accent,
-                        style: StrokeStyle(lineWidth: 5, lineCap: .round)
-                    )
-                    .rotationEffect(.degrees(-90))
-                Image("HarborBatteryMark")
-                    .resizable()
-                    .renderingMode(.template)
-                    .scaledToFit()
-                    .foregroundStyle(HarborPalette.accent)
-                    .frame(width: 25, height: 25)
-            }
-            .frame(width: 54, height: 54)
-
-            VStack(alignment: .leading, spacing: 3) {
-                Text("\(store.snapshot.percentage)%")
-                    .font(.system(size: 29, weight: .bold, design: .rounded))
-                    .foregroundStyle(.primary)
-                Text(store.snapshot.stateText)
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            if let watts = store.snapshot.powerWatts {
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text(abs(watts).formatted(.number.precision(.fractionLength(1))) + " W")
-                        .font(.title3.weight(.semibold).monospacedDigit())
-                    Text(L10n.text(watts >= 0 ? "流入电池" : "电池输出"))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            }
-        }
-        .padding(16)
-    }
-
     private var footer: some View {
         HStack {
             Button {
@@ -202,9 +152,13 @@ struct DashboardView: View {
             .help("设置")
 
             Spacer()
-            Text("电池港 · 技术预览版")
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+            HStack(spacing: 5) {
+                Image(systemName: "waveform.path.ecg")
+                    .font(.system(size: 11, weight: .medium))
+                Text("Battery Harbor")
+                    .font(.caption2)
+            }
+            .foregroundStyle(.secondary)
             Spacer()
 
             Button("退出") {
@@ -216,14 +170,11 @@ struct DashboardView: View {
         .padding(.horizontal, 16)
         .frame(height: 38)
         .background {
-            ZStack {
-                Rectangle().fill(.thinMaterial)
-                Color(nsColor: .controlBackgroundColor).opacity(0.36)
-            }
+            Color(nsColor: .controlBackgroundColor).opacity(0.22)
         }
         .overlay(alignment: .top) {
             Rectangle()
-                .fill(Color.white.opacity(0.34))
+                .fill(Color.primary.opacity(0.08))
                 .frame(height: 0.5)
                 .allowsHitTesting(false)
         }
@@ -256,9 +207,443 @@ struct DashboardView: View {
     }
 }
 
+private struct DashboardSectionPicker: View {
+    @EnvironmentObject private var store: BatteryStore
+
+    let selection: DashboardSection
+    let isDisabled: Bool
+    let onSelect: (DashboardSection) -> Void
+
+    var body: some View {
+        HStack(spacing: 0) {
+            ForEach(DashboardSection.allCases) { section in
+                Button {
+                    store.selectedSection = section
+                    onSelect(section)
+                } label: {
+                    Text(section.displayName)
+                        .font(.subheadline.weight(selection == section ? .semibold : .regular))
+                        .foregroundStyle(selection == section ? .primary : .secondary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .contentShape(Rectangle())
+                        .overlay(alignment: .bottom) {
+                            Rectangle()
+                                .fill(selection == section ? HarborPalette.dataBlue : .clear)
+                                .frame(height: 2)
+                                .padding(.horizontal, 10)
+                        }
+                }
+                .buttonStyle(.plain)
+                .disabled(isDisabled)
+            }
+        }
+        .id(store.interfaceLanguage.rawValue)
+        .accessibilityLabel("页面")
+        .padding(.horizontal, 16)
+        .frame(height: 43)
+        .overlay(alignment: .bottom) {
+            Divider()
+                .padding(.horizontal, 16)
+        }
+    }
+}
+
 private enum NavigationDirection {
     case forward
     case backward
+}
+
+private struct TextFirstOverviewView: View {
+    @EnvironmentObject private var store: BatteryStore
+
+    var body: some View {
+        ScrollView {
+            VStack(spacing: 0) {
+                chargeControl
+                actionGroup
+                commandMessages
+                sectionDivider
+                powerFlow
+                sectionDivider
+                currentState
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 12)
+        }
+        .scrollIndicators(.visible)
+    }
+
+    private var sectionDivider: some View {
+        Divider()
+            .padding(.vertical, 10)
+    }
+
+    private var chargeControl: some View {
+        VStack(alignment: .leading, spacing: 9) {
+            Text("充电控制")
+                .font(.subheadline.weight(.semibold))
+
+            HStack(alignment: .bottom) {
+                compactValue(title: "当前电量", value: "\(store.snapshot.percentage)%")
+                Spacer()
+                Divider()
+                    .frame(height: 34)
+                    .padding(.trailing, 12)
+                compactValue(
+                    title: store.isTemporaryFullChargeActive ? "临时目标" : "充电上限",
+                    value: store.isTemporaryFullChargeActive ? "100%" : "\(regularChargeLimit)%"
+                )
+            }
+
+            TextFirstChargeLimitSlider(
+                value: $store.chargeLimit,
+                range: 50...100,
+                step: 5,
+                onCommit: store.updateChargeLimit
+            )
+
+            HStack {
+                Text("50%")
+                Spacer()
+                Text("\(regularChargeLimit)%")
+                    .foregroundStyle(.primary)
+                Spacer()
+                Text("100%")
+            }
+            .font(.caption2.monospacedDigit())
+            .foregroundStyle(.secondary)
+
+            Label(chargeStatusText, systemImage: chargeStatusSymbol)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(store.controlState.isAvailable ? HarborPalette.success : HarborPalette.warning)
+                .fixedSize(horizontal: false, vertical: true)
+        }
+    }
+
+    private func compactValue(title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 1) {
+            Text(L10n.text(title))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Text(value)
+                .font(.title3.weight(.medium).monospacedDigit())
+        }
+    }
+
+    private var powerFlow: some View {
+        let input = max(store.snapshot.adapterInputWatts ?? 0, 0)
+        let system = max(store.snapshot.systemLoadWatts ?? 0, 0)
+        let battery = abs(store.snapshot.powerWatts ?? 0)
+
+        return VStack(alignment: .leading, spacing: 10) {
+            Text("功率流向")
+                .font(.subheadline.weight(.semibold))
+
+            HStack(spacing: 0) {
+                powerMetric(title: "输入", value: input, symbol: "powerplug")
+                Divider().frame(height: 54)
+                powerMetric(title: "系统", value: system, symbol: "laptopcomputer")
+                Divider().frame(height: 54)
+                powerMetric(title: "电池", value: battery, symbol: nativeBatterySymbol)
+            }
+        }
+    }
+
+    private func powerMetric(title: String, value: Double, symbol: String) -> some View {
+        VStack(spacing: 3) {
+            Text(L10n.text(title))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+            Image(systemName: symbol)
+                .font(.system(size: 16, weight: .regular))
+                .frame(height: 19)
+            Text(value.formatted(.number.precision(.fractionLength(1))) + " W")
+                .font(.subheadline.weight(.medium).monospacedDigit())
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var nativeBatterySymbol: String {
+        store.snapshot.menuBarSymbol
+    }
+
+    private var currentState: some View {
+        let status = store.chargingPathStatus
+
+        return VStack(alignment: .leading, spacing: 8) {
+            Text("当前状态")
+                .font(.subheadline.weight(.semibold))
+
+            HStack(spacing: 5) {
+                stateText(status.connection.displayName)
+                stateArrow
+                stateText(status.negotiation.displayName)
+                stateArrow
+                stateText(status.systemSupply.displayName)
+                stateArrow
+                stateText(status.batteryFlow.displayName, highlighted: true)
+            }
+
+            HStack(alignment: .top, spacing: 7) {
+                Image(systemName: status.diagnostic.symbol)
+                    .foregroundStyle(diagnosticTint)
+                    .frame(width: 16)
+                Text(status.diagnostic.detail)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+    }
+
+    private func stateText(_ value: String, highlighted: Bool = false) -> some View {
+        Text(value)
+            .font(.caption.weight(highlighted ? .semibold : .regular))
+            .foregroundStyle(highlighted ? diagnosticTint : .secondary)
+            .lineLimit(1)
+            .minimumScaleFactor(0.62)
+            .frame(maxWidth: .infinity)
+    }
+
+    private var stateArrow: some View {
+        Image(systemName: "arrow.right")
+            .font(.system(size: 9, weight: .medium))
+            .foregroundStyle(.secondary)
+    }
+
+    private var actionGroup: some View {
+        HStack(spacing: 10) {
+            actionButton(
+                title: L10n.text(store.isChargingPaused ? "恢复充电" : "暂停充电"),
+                subtitle: L10n.text(store.isChargingPaused ? "重新允许电池充电" : "停止向电池充电"),
+                symbol: store.isChargingPaused ? "play.fill" : "pause.fill",
+                tint: HarborPalette.dataBlue,
+                action: store.toggleChargingPaused
+            )
+
+            actionButton(
+                title: L10n.text(store.isTemporaryFullChargeActive ? "结束临时充满" : "临时充满"),
+                subtitle: L10n.text(store.isTemporaryFullChargeActive ? "恢复常规充电上限" : "临时调整到 100%"),
+                symbol: store.isTemporaryFullChargeActive ? "xmark" : "bolt.fill",
+                tint: store.isTemporaryFullChargeActive ? HarborPalette.danger : HarborPalette.dataBlue,
+                action: store.isTemporaryFullChargeActive
+                    ? store.cancelTemporaryFullCharge
+                    : store.temporaryFullCharge
+            )
+        }
+        .padding(.top, 12)
+    }
+
+    private func actionButton(
+        title: String,
+        subtitle: String,
+        symbol: String,
+        tint: Color,
+        action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            VStack(alignment: .leading, spacing: 7) {
+                HStack(spacing: 8) {
+                    Image(systemName: symbol)
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(tint)
+                        .frame(width: 28, height: 28)
+                        .overlay {
+                            Circle().stroke(tint.opacity(0.72), lineWidth: 1)
+                        }
+                    Text(title)
+                        .font(.subheadline.weight(.medium))
+                        .lineLimit(1)
+                    Spacer(minLength: 0)
+                }
+
+                Text(subtitle)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+            }
+            .padding(10)
+            .frame(maxWidth: .infinity, minHeight: 76, alignment: .topLeading)
+            .background(
+                Color(nsColor: .controlBackgroundColor).opacity(0.28),
+                in: RoundedRectangle(cornerRadius: 10, style: .continuous)
+            )
+            .overlay {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .stroke(Color.primary.opacity(0.10), lineWidth: 0.6)
+                    .allowsHitTesting(false)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .frame(maxWidth: .infinity)
+        .disabled(!store.controlState.isAvailable || store.isChargingCommandInProgress)
+    }
+
+    @ViewBuilder
+    private var commandMessages: some View {
+        if let text = store.temporaryFullChargeStatusText {
+            Text(text)
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 6)
+        }
+        if let message = store.chargingCommandMessage {
+            HStack(spacing: 6) {
+                if store.isChargingCommandInProgress {
+                    ProgressView().controlSize(.small)
+                }
+                Text(message)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.top, 6)
+        }
+        if let reason = store.controlUnavailableReason {
+            Label(reason, systemImage: "wrench.and.screwdriver")
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top, 6)
+        }
+    }
+
+    private var regularChargeLimit: Int {
+        Int(store.chargeLimit.rounded())
+    }
+
+    private var chargeStatusText: String {
+        guard store.isTemporaryFullChargeActive else { return store.chargeLimitStatusText }
+        return L10n.format("临时充满已启用，结束后恢复 %lld%% 上限", regularChargeLimit)
+    }
+
+    private var chargeStatusSymbol: String {
+        store.isTemporaryFullChargeActive ? "bolt.badge.checkmark.fill" : store.chargeLimitStatusSymbol
+    }
+
+    private var diagnosticTint: Color {
+        switch store.chargingPathStatus.diagnostic.level {
+        case .normal: HarborPalette.success
+        case .informational: HarborPalette.dataBlue
+        case .warning: HarborPalette.warning
+        }
+    }
+}
+
+private struct TextFirstChargeLimitSlider: View {
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
+    @Binding var value: Double
+    let range: ClosedRange<Double>
+    let step: Double
+    let onCommit: () -> Void
+
+    private let thumbDiameter: CGFloat = 30
+    private let particlePositions: [(CGFloat, CGFloat)] = [
+        (0.07, 0.34), (0.12, 0.62), (0.19, 0.42), (0.28, 0.68),
+        (0.36, 0.29), (0.43, 0.57), (0.52, 0.37), (0.59, 0.69),
+        (0.67, 0.28), (0.74, 0.55), (0.81, 0.36)
+    ]
+
+    var body: some View {
+        GeometryReader { proxy in
+            let trackWidth = max(proxy.size.width - thumbDiameter, 1)
+            let progress = min(max((value - range.lowerBound) / (range.upperBound - range.lowerBound), 0), 1)
+            let thumbX = thumbDiameter / 2 + trackWidth * progress
+
+            ZStack(alignment: .leading) {
+                Capsule()
+                    .fill(Color.secondary.opacity(0.18))
+                    .frame(height: 24)
+                    .padding(.horizontal, thumbDiameter / 2)
+
+                Capsule()
+                    .fill(
+                        LinearGradient(
+                            colors: [
+                                Color(red: 0.93, green: 0.96, blue: 0.99),
+                                Color(red: 0.62, green: 0.76, blue: 0.94),
+                                HarborPalette.dataBlue,
+                                Color(red: 0.05, green: 0.24, blue: 0.52)
+                            ],
+                            startPoint: .leading,
+                            endPoint: .trailing
+                        )
+                    )
+                    .frame(width: max(trackWidth * progress, 1), height: 24)
+                    .padding(.leading, thumbDiameter / 2)
+
+                ForEach(Array(particlePositions.enumerated()), id: \.offset) { index, position in
+                    let particleColor = colorScheme == .dark || position.0 > 0.38
+                        ? Color.white
+                        : Color(red: 0.30, green: 0.46, blue: 0.67)
+                    Circle()
+                        .fill(particleColor.opacity(index.isMultiple(of: 3) ? 0.90 : 0.58))
+                        .frame(width: index.isMultiple(of: 4) ? 2.5 : 1.6)
+                        .position(
+                            x: thumbDiameter / 2 + trackWidth * position.0,
+                            y: 8 + 14 * position.1
+                        )
+                        .opacity(position.0 <= progress ? 1 : 0)
+                        .allowsHitTesting(false)
+                }
+
+                Circle()
+                    .fill(colorScheme == .dark ? Color.black.opacity(0.52) : Color.white.opacity(0.94))
+                    .frame(width: thumbDiameter, height: thumbDiameter)
+                    .overlay {
+                        Circle()
+                            .stroke(Color.white.opacity(colorScheme == .dark ? 0.92 : 0.72), lineWidth: 1.5)
+                    }
+                    .shadow(color: .black.opacity(colorScheme == .dark ? 0.32 : 0.16), radius: 5, y: 2)
+                    .position(x: thumbX, y: proxy.size.height / 2)
+                    .allowsHitTesting(false)
+            }
+            .animation(
+                reduceMotion
+                    ? nil
+                    : .timingCurve(0.22, 0.74, 0.20, 1, duration: 0.20),
+                value: progress
+            )
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 0)
+                    .onChanged { gesture in
+                        updateValue(at: gesture.location.x, width: proxy.size.width)
+                    }
+                    .onEnded { gesture in
+                        updateValue(at: gesture.location.x, width: proxy.size.width)
+                        onCommit()
+                    }
+            )
+        }
+        .frame(height: 34)
+        .accessibilityElement()
+        .accessibilityLabel("充电上限")
+        .accessibilityValue("\(Int(value.rounded()))%")
+        .accessibilityAdjustableAction { direction in
+            switch direction {
+            case .increment:
+                value = min(range.upperBound, value + step)
+                onCommit()
+            case .decrement:
+                value = max(range.lowerBound, value - step)
+                onCommit()
+            @unknown default:
+                break
+            }
+        }
+    }
+
+    private func updateValue(at x: CGFloat, width: CGFloat) {
+        let usableWidth = max(width - thumbDiameter, 1)
+        let progress = min(max((x - thumbDiameter / 2) / usableWidth, 0), 1)
+        let rawValue = range.lowerBound + Double(progress) * (range.upperBound - range.lowerBound)
+        value = min(range.upperBound, max(range.lowerBound, (rawValue / step).rounded() * step))
+    }
 }
 
 private struct OverviewView: View {
@@ -266,76 +651,91 @@ private struct OverviewView: View {
     @Environment(\.openWindow) private var openWindow
 
     var body: some View {
-        ScrollView {
-            VStack(spacing: 14) {
-                chargeLimitCard
-                controls
-                metrics
-                Button {
-                    openWindow(id: "battery-details")
-                } label: {
-                    Label("查看电池详情", systemImage: "info.circle")
-                        .frame(maxWidth: .infinity)
+        VStack(spacing: 10) {
+            primaryControlCard
+
+            ScrollView {
+                LazyVStack(spacing: 10) {
+                    HStack(spacing: 6) {
+                        Image(systemName: "chevron.down")
+                        Text("更多充电详情")
+                    }
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+
+                    chargeLimitDetailCard
+                    powerAllocationCard
+                    currentStateCard
+
+                    if let reason = store.controlUnavailableReason {
+                        Label(reason, systemImage: "wrench.and.screwdriver")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(12)
+                            .harborGlassCard(cornerRadius: 12, tint: .orange.opacity(0.08))
+                    }
                 }
-                .harborGlassButtonStyle()
-                if let reason = store.controlUnavailableReason {
-                    Label(reason, systemImage: "wrench.and.screwdriver")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(12)
-                        .harborGlassCard(cornerRadius: 12, tint: .orange.opacity(0.08))
-                }
+                .padding(.bottom, 10)
             }
-            .padding(.horizontal, 16)
-            .padding(.bottom, 16)
+            .scrollIndicators(.visible)
         }
+        .padding(.horizontal, 16)
+        .padding(.bottom, 8)
     }
 
-    private var chargeLimitCard: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            HStack {
-                Image(chargeStatusIconAsset)
-                    .resizable()
-                    .renderingMode(.template)
-                    .scaledToFit()
-                    .foregroundStyle(chargeStatusTint)
-                    .padding(9)
-                    .frame(width: 38, height: 38)
-                    .background(chargeStatusTint.opacity(0.14), in: RoundedRectangle(cornerRadius: 11))
-
-                VStack(alignment: .leading, spacing: 3) {
-                    Text(chargeStatusTitle)
+    private var primaryControlCard: some View {
+        VStack(spacing: 10) {
+            HStack(alignment: .center, spacing: 12) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("充电控制")
                         .font(.headline)
-                    Text(adapterElectricalText)
-                        .font(.caption.monospacedDigit())
-                        .foregroundStyle(.secondary)
-                        .lineLimit(1)
-                }
-                Spacer()
-                VStack(alignment: .trailing, spacing: 2) {
-                    Text(chargeTargetHeadline)
-                        .font(.headline.monospacedDigit())
-                        .foregroundStyle(chargeStatusTint)
-                    Text(chargeTargetCaption)
-                        .font(.caption2)
-                        .foregroundStyle(.secondary)
-                }
-            }
-
-            HStack(alignment: .firstTextBaseline) {
-                HStack(alignment: .firstTextBaseline, spacing: 5) {
-                    Text("\(store.snapshot.percentage)%")
-                        .font(.system(size: 28, weight: .bold, design: .rounded))
-                        .monospacedDigit()
-                        .foregroundStyle(chargeStatusTint)
-                    Text("实时电量")
+                    Text(store.chargingPathStatus.batteryFlow.displayName)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
+
+                Spacer(minLength: 4)
+
+                compactValue(
+                    title: "当前电量",
+                    value: "\(store.snapshot.percentage)%"
+                )
+                compactValue(
+                    title: store.isTemporaryFullChargeActive ? "临时目标" : "充电上限",
+                    value: store.isTemporaryFullChargeActive ? "100%" : "\(regularChargeLimit)%"
+                )
+            }
+
+            controls
+        }
+        .padding(12)
+        .harborGlassCard(cornerRadius: 18, tint: HarborPalette.dataBlue.opacity(0.04))
+    }
+
+    private func compactValue(title: String, value: String) -> some View {
+        VStack(alignment: .trailing, spacing: 1) {
+            Text(L10n.text(title))
+                .font(.system(size: 9, weight: .medium))
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+            Text(value)
+                .font(.title3.weight(.bold).monospacedDigit())
+                .foregroundStyle(HarborPalette.dataBlue)
+        }
+        .frame(minWidth: 56, alignment: .trailing)
+    }
+
+    private var chargeLimitDetailCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            HStack {
+                Text("充电上限")
+                    .font(.subheadline.weight(.semibold))
                 Spacer()
-                Text(chargeTargetLabel)
-                    .font(.subheadline.weight(.semibold).monospacedDigit())
+                Text(store.isTemporaryFullChargeActive ? "100%" : "\(regularChargeLimit)%")
+                    .font(.subheadline.weight(.bold).monospacedDigit())
+                    .foregroundStyle(HarborPalette.dataBlue)
             }
 
             ChargeLimitGradientSlider(
@@ -348,56 +748,196 @@ private struct OverviewView: View {
             HStack {
                 Text("50%")
                 Spacer()
-                Text("拖动标记调整充电上限")
+                Text("100%")
+            }
+            .font(.caption2.monospacedDigit())
+            .foregroundStyle(.secondary)
+
+            Label(chargeTargetStatusText, systemImage: chargeTargetStatusSymbol)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(store.controlState.isAvailable ? HarborPalette.success : HarborPalette.warning)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Divider()
+
+            HStack(spacing: 0) {
+                dashboardMetric(title: "电压", value: voltageText, symbol: "bolt.fill")
+                Divider().frame(height: 40)
+                dashboardMetric(
+                    title: "功率",
+                    value: powerText(store.snapshot.powerWatts.map(abs)),
+                    symbol: "waveform.path.ecg"
+                )
+                Divider().frame(height: 40)
+                dashboardMetric(title: "电池温度", value: temperatureText, symbol: "thermometer.medium")
+            }
+        }
+        .padding(13)
+        .harborGlassCard(cornerRadius: 18, tint: HarborPalette.dataBlue.opacity(0.04))
+    }
+
+    private var chargeLimitSummaryCard: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Text("充电上限")
+                    .font(.subheadline.weight(.semibold))
+                Spacer()
+                Button {
+                    openWindow(id: "battery-details")
+                } label: {
+                    Image(systemName: "info.circle")
+                        .font(.system(size: 15, weight: .medium))
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.secondary)
+                .help("查看电池详情")
+            }
+
+            ZStack {
+                Circle()
+                    .stroke(HarborPalette.dataBlue.opacity(0.10), lineWidth: 12)
+                Circle()
+                    .trim(from: 0, to: max(0.02, store.chargeLimit / 100))
+                    .stroke(
+                        HarborPalette.dataBlue,
+                        style: StrokeStyle(lineWidth: 12, lineCap: .round)
+                    )
+                    .rotationEffect(.degrees(-90))
+                VStack(spacing: 1) {
+                    Text("\(regularChargeLimit)%")
+                        .font(.system(size: 26, weight: .bold, design: .rounded))
+                        .foregroundStyle(HarborPalette.dataBlue)
+                        .monospacedDigit()
+                    Text(L10n.text(store.isTemporaryFullChargeActive ? "临时目标" : "目标"))
+                        .font(.system(size: 9, weight: .medium))
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .frame(width: 112, height: 112)
+            .frame(maxWidth: .infinity)
+        }
+        .padding(13)
+        .frame(maxWidth: .infinity, minHeight: 158, alignment: .topLeading)
+        .harborGlassCard(cornerRadius: 18, tint: HarborPalette.dataBlue.opacity(0.04))
+    }
+
+    private var powerAllocationCard: some View {
+        let input = max(store.snapshot.adapterInputWatts ?? 0, 0)
+        let system = max(store.snapshot.systemLoadWatts ?? 0, 0)
+        let battery = abs(store.snapshot.powerWatts ?? 0)
+        let maximum = max(input, system, battery, 1)
+
+        return VStack(alignment: .leading, spacing: 8) {
+            Text("功率分配")
+                .font(.subheadline.weight(.semibold))
+            HStack(alignment: .bottom, spacing: 8) {
+                DashboardPowerColumn(
+                    title: "输入",
+                    value: input,
+                    maximum: maximum,
+                    tint: HarborPalette.dataBlue
+                )
+                DashboardPowerColumn(
+                    title: "系统",
+                    value: system,
+                    maximum: maximum,
+                    tint: Color.cyan.opacity(0.72)
+                )
+                DashboardPowerColumn(
+                    title: "电池",
+                    value: battery,
+                    maximum: maximum,
+                    tint: (store.snapshot.powerWatts ?? 0) < 0
+                        ? HarborPalette.warning
+                        : HarborPalette.success
+                )
+            }
+            .frame(maxWidth: .infinity)
+        }
+        .padding(13)
+        .frame(maxWidth: .infinity, minHeight: 158, alignment: .topLeading)
+        .harborGlassCard(cornerRadius: 18, tint: HarborPalette.dataBlue.opacity(0.04))
+    }
+
+    private var chargeControlCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            Text("充电控制")
+                .font(.headline)
+
+            HStack(alignment: .bottom) {
+                VStack(alignment: .leading, spacing: 2) {
+                    Text("当前电量")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text("\(store.snapshot.percentage)%")
+                        .font(.system(size: 28, weight: .bold, design: .rounded))
+                        .foregroundStyle(HarborPalette.dataBlue)
+                        .monospacedDigit()
+                }
+                Spacer()
+                VStack(alignment: .trailing, spacing: 2) {
+                    Text("充电上限目标")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text(store.isTemporaryFullChargeActive ? "100%" : "\(regularChargeLimit)%")
+                        .font(.system(size: 25, weight: .bold, design: .rounded))
+                        .foregroundStyle(HarborPalette.dataBlue)
+                        .monospacedDigit()
+                }
+            }
+
+            ChargeLimitGradientSlider(
+                value: $store.chargeLimit,
+                range: 50...100,
+                step: 5,
+                onCommit: store.updateChargeLimit
+            )
+
+            HStack {
+                Text("50%")
+                Spacer()
+                Text("\(regularChargeLimit)%")
+                    .foregroundStyle(HarborPalette.dataBlue)
                 Spacer()
                 Text("100%")
             }
-            .font(.caption2)
+            .font(.caption.monospacedDigit())
             .foregroundStyle(.secondary)
 
-            HStack(spacing: 7) {
-                chargeMetric(title: L10n.text("输入"), value: powerText(store.snapshot.adapterInputWatts), tint: HarborPalette.warning)
-                chargeMetric(title: L10n.text("系统"), value: powerText(store.snapshot.systemLoadWatts), tint: HarborPalette.dataBlue)
-                chargeMetric(
-                    title: L10n.text((store.snapshot.powerWatts ?? 0) < 0 ? "电池输出" : "充入电池"),
+            Label(chargeTargetStatusText, systemImage: chargeTargetStatusSymbol)
+                .font(.caption.weight(.medium))
+                .foregroundStyle(store.controlState.isAvailable ? HarborPalette.success : HarborPalette.warning)
+                .fixedSize(horizontal: false, vertical: true)
+
+            Divider()
+
+            HStack(spacing: 0) {
+                dashboardMetric(
+                    title: "电压",
+                    value: voltageText,
+                    symbol: "bolt.fill"
+                )
+                Divider().frame(height: 40)
+                dashboardMetric(
+                    title: "功率",
                     value: powerText(store.snapshot.powerWatts.map(abs)),
-                    tint: (store.snapshot.powerWatts ?? 0) < 0 ? HarborPalette.warning : HarborPalette.success
+                    symbol: "waveform.path.ecg"
+                )
+                Divider().frame(height: 40)
+                dashboardMetric(
+                    title: "电池温度",
+                    value: temperatureText,
+                    symbol: "thermometer.medium"
                 )
             }
 
-            Label(chargeTargetStatusText, systemImage: chargeTargetStatusSymbol)
-                .font(.caption)
-                .foregroundStyle(store.controlState.isAvailable ? HarborPalette.success : HarborPalette.warning)
-                .fixedSize(horizontal: false, vertical: true)
-            Toggle("超出上限时自动放电", isOn: $store.automaticallyDischarges)
-                .toggleStyle(.switch)
-                .controlSize(.small)
         }
-        .padding(14)
-        .harborGlassCard(cornerRadius: 18)
+        .padding(15)
+        .harborGlassCard(cornerRadius: 20, tint: HarborPalette.dataBlue.opacity(0.04))
     }
 
     private var regularChargeLimit: Int {
         Int(store.chargeLimit.rounded())
-    }
-
-    private var chargeTargetHeadline: String {
-        store.isTemporaryFullChargeActive
-            ? L10n.text("临时目标 100%")
-            : L10n.format("上限 %lld%%", regularChargeLimit)
-    }
-
-    private var chargeTargetCaption: String {
-        if store.isTemporaryFullChargeActive {
-            return L10n.format("常规上限 %lld%%", regularChargeLimit)
-        }
-        return L10n.text(store.snapshot.powerSource == .adapter ? "适配器已连接" : "电池供电")
-    }
-
-    private var chargeTargetLabel: String {
-        store.isTemporaryFullChargeActive
-            ? L10n.text("临时目标 100%")
-            : L10n.format("目标 %lld%%", regularChargeLimit)
     }
 
     private var chargeTargetStatusText: String {
@@ -409,85 +949,127 @@ private struct OverviewView: View {
         store.isTemporaryFullChargeActive ? "bolt.badge.checkmark.fill" : store.chargeLimitStatusSymbol
     }
 
-    private var chargeStatusTitle: String {
-        if store.snapshot.powerSource != .adapter { return L10n.text("电池供电中") }
-        if store.isTemporaryFullChargeActive { return L10n.text("临时充满中") }
-        if store.isChargingPaused { return L10n.text("充电已暂停") }
-        if store.snapshot.isCharging { return L10n.text("正在充电") }
-        if store.snapshot.percentage >= Int(store.chargeLimit.rounded()) {
-            return L10n.text("已达到充电上限")
-        }
-        return L10n.text("已接电源，未充电")
-    }
+    private var currentStateCard: some View {
+        let status = store.chargingPathStatus
+        return VStack(alignment: .leading, spacing: 12) {
+            Text("当前状态")
+                .font(.headline)
 
-    private var chargeStatusIconAsset: String {
-        store.snapshot.powerSource == .adapter ? "HarborPlugMark" : "HarborBatteryMark"
-    }
-
-    private var chargeStatusTint: Color {
-        if store.snapshot.powerSource != .adapter { return HarborPalette.dataBlue }
-        if store.isTemporaryFullChargeActive { return HarborPalette.success }
-        if store.isChargingPaused { return HarborPalette.warning }
-        if store.snapshot.isCharging { return HarborPalette.success }
-        return HarborPalette.accent
-    }
-
-    private var adapterElectricalText: String {
-        guard store.snapshot.powerSource == .adapter else {
-            return L10n.text("当前未连接电源适配器")
-        }
-        let voltage = store.snapshot.adapterVoltageVolts.map {
-            $0.formatted(.number.precision(.fractionLength(2))) + " V"
-        }
-        let current = store.snapshot.adapterCurrentAmps.map {
-            abs($0).formatted(.number.precision(.fractionLength(2))) + " A"
-        }
-        let input = store.snapshot.adapterInputWatts.map {
-            abs($0).formatted(.number.precision(.fractionLength(2))) + " W"
-        }
-        let electrical = [voltage, current].compactMap { $0 }.joined(separator: " @ ")
-        return [electrical.isEmpty ? nil : electrical, input].compactMap { $0 }.joined(separator: " · ")
-    }
-
-    private func chargeMetric(title: String, value: String, tint: Color) -> some View {
-        VStack(alignment: .leading, spacing: 2) {
-            HStack(spacing: 5) {
-                Circle()
-                    .fill(tint)
-                    .frame(width: 5, height: 5)
-                Text(title)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
+            HStack(spacing: 3) {
+                stateStage(status.connection.displayName, status.connection.symbol, tint: HarborPalette.dataBlue)
+                stateArrow
+                stateStage(status.negotiation.displayName, status.negotiation.symbol, tint: HarborPalette.dataBlue)
+                stateArrow
+                stateStage(status.systemSupply.displayName, status.systemSupply.symbol, tint: HarborPalette.dataBlue)
+                stateArrow
+                stateStage(status.batteryFlow.displayName, status.batteryFlow.symbol, tint: diagnosticTint)
             }
-            Text(value)
-                .font(.caption.weight(.semibold).monospacedDigit())
-                .lineLimit(1)
+
+            Divider()
+
+            HStack(alignment: .top, spacing: 8) {
+                Image(systemName: status.diagnostic.symbol)
+                    .foregroundStyle(diagnosticTint)
+                    .frame(width: 18)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(status.diagnostic.title)
+                        .font(.caption.weight(.semibold))
+                    Text(status.diagnostic.detail)
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+            }
         }
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .padding(.horizontal, 9)
-        .padding(.vertical, 7)
-        .harborGlassCard(cornerRadius: 10)
+        .padding(14)
+        .harborGlassCard(cornerRadius: 18, tint: HarborPalette.dataBlue.opacity(0.04))
+    }
+
+    private var diagnosticTint: Color {
+        switch store.chargingPathStatus.diagnostic.level {
+        case .normal: HarborPalette.success
+        case .informational: HarborPalette.dataBlue
+        case .warning: HarborPalette.warning
+        }
+    }
+
+    private func stateStage(_ value: String, _ symbol: String, tint: Color) -> some View {
+        VStack(spacing: 4) {
+            Image(systemName: symbol)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(tint)
+                .frame(width: 38, height: 38)
+                .background(tint.opacity(0.08), in: Circle())
+                .overlay { Circle().stroke(tint.opacity(0.24), lineWidth: 1) }
+            Text(value)
+                .font(.system(size: 9, weight: .semibold))
+                .lineLimit(1)
+                .minimumScaleFactor(0.62)
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var stateArrow: some View {
+        Image(systemName: "arrow.right")
+            .font(.system(size: 10, weight: .semibold))
+            .foregroundStyle(HarborPalette.dataBlue.opacity(0.62))
+    }
+
+    private func dashboardMetric(title: String, value: String, symbol: String) -> some View {
+        HStack(spacing: 7) {
+            Image(systemName: symbol)
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(HarborPalette.dataBlue)
+                .frame(width: 28, height: 28)
+                .background(HarborPalette.dataBlue.opacity(0.07), in: Circle())
+            VStack(alignment: .leading, spacing: 1) {
+                Text(value)
+                    .font(.caption.weight(.semibold).monospacedDigit())
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.72)
+                Text(L10n.text(title))
+                    .font(.system(size: 9))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    private var voltageText: String {
+        let voltage = store.snapshot.powerSource == .adapter
+            ? (store.snapshot.adapterVoltageVolts ?? store.snapshot.voltageVolts)
+            : store.snapshot.voltageVolts
+        return voltage.map {
+            $0.formatted(.number.precision(.fractionLength(1))) + " V"
+        } ?? "— V"
     }
 
     private func powerText(_ value: Double?) -> String {
-        value.map { abs($0).formatted(.number.precision(.fractionLength(2))) + " W" } ?? "— W"
+        value.map { abs($0).formatted(.number.precision(.fractionLength(1))) + " W" } ?? "— W"
+    }
+
+    private var temperatureText: String {
+        store.snapshot.temperatureCelsius.map {
+            $0.formatted(.number.precision(.fractionLength(1))) + "°C"
+        } ?? "—"
     }
 
     private var controls: some View {
-        VStack(alignment: .trailing, spacing: 4) {
+        VStack(alignment: .trailing, spacing: 5) {
             HStack(spacing: 10) {
                 ControlButton(
                     title: L10n.text(store.isChargingPaused ? "恢复充电" : "暂停充电"),
+                    subtitle: L10n.text(store.isChargingPaused ? "重新允许电池充电" : "停止向电池充电"),
                     symbol: store.isChargingPaused ? "play.fill" : "pause.fill",
-                    tint: HarborPalette.warning,
+                    tint: HarborPalette.dataBlue,
                     enabled: store.controlState.isAvailable && !store.isChargingCommandInProgress,
                     action: store.toggleChargingPaused
                 )
                 ControlButton(
                     title: L10n.text(store.isTemporaryFullChargeActive ? "结束临时充满" : "临时充满"),
+                    subtitle: L10n.text(store.isTemporaryFullChargeActive ? "恢复常规充电上限" : "临时调整到 100%"),
                     symbol: store.isTemporaryFullChargeActive ? "xmark.circle.fill" : "bolt.fill",
-                    tint: store.isTemporaryFullChargeActive ? HarborPalette.danger : HarborPalette.success,
+                    tint: store.isTemporaryFullChargeActive ? HarborPalette.danger : HarborPalette.dataBlue,
                     enabled: store.controlState.isAvailable && !store.isChargingCommandInProgress,
                     action: store.isTemporaryFullChargeActive
                         ? store.cancelTemporaryFullCharge
@@ -514,22 +1096,42 @@ private struct OverviewView: View {
             }
         }
     }
+}
 
-    private var metrics: some View {
-        LazyVGrid(columns: [.init(.flexible()), .init(.flexible())], spacing: 10) {
-            MetricTile(title: L10n.text("电池温度"), value: temperatureText, symbol: "thermometer.medium", tint: HarborPalette.warning)
-            MetricTile(title: L10n.text("电池健康"), value: healthText, symbol: "heart.fill", tint: HarborPalette.danger)
-            MetricTile(title: L10n.text("循环次数"), value: store.snapshot.cycleCount.map(String.init) ?? "—", symbol: "arrow.triangle.2.circlepath", tint: HarborPalette.accent)
-            MetricTile(title: L10n.text("预计时间"), value: store.snapshot.timeRemainingText ?? L10n.text("计算中"), symbol: "clock.fill", tint: HarborPalette.dataBlue)
+private struct DashboardPowerColumn: View {
+    let title: String
+    let value: Double
+    let maximum: Double
+    let tint: Color
+
+    var body: some View {
+        VStack(spacing: 4) {
+            Text(L10n.text(title))
+                .font(.system(size: 9, weight: .medium))
+                .foregroundStyle(.secondary)
+            Text(value.formatted(.number.precision(.fractionLength(1))) + " W")
+                .font(.caption2.weight(.semibold).monospacedDigit())
+                .lineLimit(1)
+                .minimumScaleFactor(0.65)
+            GeometryReader { proxy in
+                let fraction = min(max(value / maximum, 0), 1)
+                ZStack(alignment: .bottom) {
+                    Capsule()
+                        .fill(HarborPalette.dataBlue.opacity(0.08))
+                    Capsule()
+                        .fill(
+                            LinearGradient(
+                                colors: [tint.opacity(0.58), tint],
+                                startPoint: .bottom,
+                                endPoint: .top
+                            )
+                        )
+                        .frame(height: max(3, proxy.size.height * fraction))
+                }
+            }
+            .frame(width: 30, height: 72)
         }
-    }
-
-    private var temperatureText: String {
-        store.snapshot.temperatureCelsius.map { $0.formatted(.number.precision(.fractionLength(1))) + "°C" } ?? "—"
-    }
-
-    private var healthText: String {
-        store.snapshot.healthPercentage.map { $0.formatted(.number.precision(.fractionLength(0))) + "%" } ?? "—"
+        .frame(maxWidth: .infinity)
     }
 }
 
@@ -631,6 +1233,7 @@ private struct ChargeLimitGradientSlider: View {
 
 private struct ControlButton: View {
     let title: String
+    let subtitle: String
     let symbol: String
     let tint: Color
     let enabled: Bool
@@ -638,21 +1241,34 @@ private struct ControlButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 6) {
+            HStack(spacing: 10) {
                 Image(systemName: symbol)
-                    .font(.system(size: 16, weight: .semibold))
+                    .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(enabled ? tint : .secondary)
-                    .frame(width: 34, height: 30)
+                    .frame(width: 38, height: 38)
                     .background(
                         (enabled ? tint : Color.secondary).opacity(0.10),
-                        in: RoundedRectangle(cornerRadius: 9, style: .continuous)
+                        in: Circle()
                     )
-                Text(title)
-                    .font(.subheadline.weight(.medium))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.subheadline.weight(.semibold))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.72)
+                    Text(subtitle)
+                        .font(.system(size: 9))
+                        .foregroundStyle(.secondary)
+                        .lineLimit(2)
+                }
+                Spacer(minLength: 0)
             }
+            .padding(.horizontal, 12)
             .frame(maxWidth: .infinity)
-            .frame(height: 68)
-            .harborGlassCard(cornerRadius: 14, interactive: true)
+                    .frame(height: 58)
+            .harborGlassCard(
+                cornerRadius: 16,
+                tint: HarborPalette.dataBlue.opacity(0.05)
+            )
             // Keep hit testing aligned with the complete card instead of only
             // the visible icon and text inside the plain button label.
             .contentShape(Rectangle())
@@ -711,27 +1327,8 @@ struct HarborRootBackground: View {
             } else {
                 HarborBackdropView()
                 Color(nsColor: .windowBackgroundColor)
-                    .opacity(colorScheme == .dark ? 0.22 : 0.14)
+                    .opacity(colorScheme == .dark ? 0.42 : 0.36)
             }
-            LinearGradient(
-                colors: [
-                    Color.white.opacity(colorScheme == .dark ? 0.035 : 0.16),
-                    .clear,
-                    HarborPalette.accent.opacity(colorScheme == .dark ? 0.045 : 0.035),
-                    HarborPalette.dataBlue.opacity(colorScheme == .dark ? 0.035 : 0.024)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            RadialGradient(
-                colors: [
-                    Color.white.opacity(colorScheme == .dark ? 0.025 : 0.13),
-                    .clear
-                ],
-                center: .topLeading,
-                startRadius: 4,
-                endRadius: 330
-            )
         }
         .ignoresSafeArea()
     }
@@ -740,27 +1337,35 @@ struct HarborRootBackground: View {
 private struct HarborBackdropView: NSViewRepresentable {
     func makeNSView(context: Context) -> NSVisualEffectView {
         let view = HarborBackdropVisualEffectView(frame: .zero)
-        view.material = .underWindowBackground
+        view.material = .popover
         view.blendingMode = .behindWindow
-        view.state = .active
+        view.state = .followsWindowActiveState
         view.isEmphasized = false
-        view.alphaValue = 0.82
+        view.alphaValue = 1
         return view
     }
 
     func updateNSView(_ nsView: NSVisualEffectView, context: Context) {
-        nsView.material = .underWindowBackground
+        nsView.material = .popover
         nsView.blendingMode = .behindWindow
-        nsView.state = .active
-        nsView.alphaValue = 0.82
+        nsView.state = .followsWindowActiveState
+        nsView.alphaValue = 1
     }
 }
 
 private final class HarborBackdropVisualEffectView: NSVisualEffectView {
     override func viewDidMoveToWindow() {
         super.viewDidMoveToWindow()
-        window?.isOpaque = false
-        window?.backgroundColor = .clear
+        // NSViewRepresentable can be attached while SwiftUI is already in an
+        // AppKit layout pass. Mutating the window synchronously here causes a
+        // recursive layout on first menu expansion, which shows up as a very
+        // visible hitch. Defer the one-time window configuration to the next
+        // main-loop turn instead.
+        guard let attachedWindow = window else { return }
+        DispatchQueue.main.async { [weak attachedWindow] in
+            attachedWindow?.isOpaque = false
+            attachedWindow?.backgroundColor = .clear
+        }
     }
 }
 
@@ -813,12 +1418,12 @@ private struct HarborGlassCardModifier: ViewModifier {
     func body(content: Content) -> some View {
         let shape = RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
 
-        if #available(macOS 26.0, *), !reduceTransparency {
+        if #available(macOS 26.0, *), !reduceTransparency, interactive {
             content
                 .background {
                     shape.fill(
                         Color(nsColor: .controlBackgroundColor)
-                            .opacity(colorScheme == .dark ? 0.36 : 0.30)
+                            .opacity(colorScheme == .dark ? 0.48 : 0.54)
                     )
                     if let tint {
                         shape.fill(tint.opacity(colorScheme == .dark ? 0.12 : 0.09))
@@ -828,61 +1433,33 @@ private struct HarborGlassCardModifier: ViewModifier {
                     .regular.tint(tint?.opacity(0.40)).interactive(interactive),
                     in: shape
                 )
-                .overlay { lacqueredSurface(for: shape) }
-                .shadow(color: .black.opacity(colorScheme == .dark ? 0.22 : 0.12), radius: 5, y: 2)
+                .overlay { subtleBoundary(for: shape) }
         } else {
             content
                 .background {
                     shape.fill(
                         reduceTransparency
                             ? Color(nsColor: .controlBackgroundColor)
-                            : Color(nsColor: .controlBackgroundColor).opacity(colorScheme == .dark ? 0.82 : 0.88)
+                            : Color(nsColor: .controlBackgroundColor).opacity(colorScheme == .dark ? 0.58 : 0.64)
                     )
                     if let tint {
                         shape.fill(tint.opacity(colorScheme == .dark ? 0.11 : 0.07))
                     }
                 }
-                .overlay { lacqueredSurface(for: shape) }
-                .shadow(color: .black.opacity(colorScheme == .dark ? 0.18 : 0.09), radius: 3, y: 1)
+                .overlay { subtleBoundary(for: shape) }
         }
     }
 
-    private func lacqueredSurface(
+    private func subtleBoundary(
         for shape: RoundedRectangle
     ) -> some View {
         ZStack {
             shape
-                .fill(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(colorScheme == .dark ? 0.055 : 0.20),
-                            .clear,
-                            Color.black.opacity(colorScheme == .dark ? 0.025 : 0.018)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    )
-                )
-            shape
-                .stroke(Color.primary.opacity(colorScheme == .dark ? 0.25 : 0.18), lineWidth: 1)
-            shape
-                .inset(by: 1)
-                .stroke(
-                    LinearGradient(
-                        colors: [
-                            Color.white.opacity(colorScheme == .dark ? 0.10 : 0.44),
-                            Color.white.opacity(colorScheme == .dark ? 0.025 : 0.10),
-                            .clear
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 0.6
-                )
+                .stroke(Color.primary.opacity(colorScheme == .dark ? 0.12 : 0.075), lineWidth: 0.6)
             if interactive {
                 shape
                     .inset(by: 0.5)
-                    .stroke(HarborPalette.accent.opacity(0.10), lineWidth: 0.5)
+                    .stroke(HarborPalette.accent.opacity(0.07), lineWidth: 0.5)
             }
         }
         .allowsHitTesting(false)

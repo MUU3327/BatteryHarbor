@@ -1,12 +1,17 @@
 import Combine
 import AppKit
 import Foundation
+import IOKit.ps
+import notify
 import ServiceManagement
 
 @MainActor
 final class BatteryStore: ObservableObject {
     @Published private(set) var snapshot: BatterySnapshot = .unavailable
-    @Published private(set) var samples: [PowerSample] = []
+    // Power samples are consumed together with the published snapshot. Keeping
+    // this collection non-published avoids a second full SwiftUI invalidation
+    // for every two-second battery refresh.
+    private(set) var samples: [PowerSample] = []
     @Published private(set) var controlState: ChargeControlState = .unavailable(reason: "正在检测…")
     @Published private(set) var capabilities: ChargeCapabilities
     @Published private(set) var appEnergyRanking: [AppEnergyUsage] = []
@@ -25,9 +30,6 @@ final class BatteryStore: ObservableObject {
     @Published private(set) var hardwareVerificationResult: HardwareVerificationPayload?
     @Published var chargeLimit: Double
     @Published var isChargingPaused = false
-    @Published var automaticallyDischarges: Bool {
-        didSet { UserDefaults.standard.set(automaticallyDischarges, forKey: "automaticallyDischarges") }
-    }
     @Published var selectedSection: DashboardSection = .overview
     @Published var menuBarDisplayMode: MenuBarDisplayMode {
         didSet { UserDefaults.standard.set(menuBarDisplayMode.rawValue, forKey: "menuBarDisplayMode") }
@@ -74,6 +76,8 @@ final class BatteryStore: ObservableObject {
     private var energySamplingTask: Task<Void, Never>?
     private var historyLoadTask: Task<Void, Never>?
     private var scheduleTask: Task<Void, Never>?
+    private var powerTransitionRefreshTask: Task<Void, Never>?
+    private var powerSourceNotificationToken: Int32?
     private var workspaceCancellables = Set<AnyCancellable>()
     private var sleepProtectionDidPause = false
     private var isPolicyApplying = false
@@ -96,7 +100,9 @@ final class BatteryStore: ObservableObject {
         self.capabilities = capabilityProbe.probe()
         let storedLimit = UserDefaults.standard.double(forKey: "chargeLimit")
         self.chargeLimit = storedLimit == 0 ? 80 : storedLimit
-        self.automaticallyDischarges = UserDefaults.standard.bool(forKey: "automaticallyDischarges")
+        // The former automatic force-discharge option was removed. Clear its
+        // persisted value so upgrades cannot keep applying a hidden policy.
+        UserDefaults.standard.removeObject(forKey: "automaticallyDischarges")
         self.menuBarDisplayMode = MenuBarDisplayMode(
             rawValue: UserDefaults.standard.string(forKey: "menuBarDisplayMode") ?? ""
         ) ?? .percentage
@@ -124,19 +130,54 @@ final class BatteryStore: ObservableObject {
         ) as? Date
 
         refresh()
-        samplingTask = Task { @MainActor [weak self] in
+        samplingTask = Task { @MainActor [weak self, reader] in
             while !Task.isCancelled {
                 try? await Task.sleep(nanoseconds: 2_000_000_000)
                 guard let self, !Task.isCancelled else { return }
-                self.refresh()
+                // IOKit registry reads are synchronous. Run them away from the
+                // main actor so pointer tracking and glass compositing are not
+                // interrupted while the panel is open.
+                let latestSnapshot = await Task.detached(priority: .utility) {
+                    reader.read()
+                }.value
+                guard !Task.isCancelled else { return }
+                self.apply(snapshot: latestSnapshot)
             }
         }
 
         energySamplingTask = Task { @MainActor [weak self] in
+            var lastSampleAt: Date?
+            var appsVisibleSince: Date?
             while !Task.isCancelled {
                 guard let self else { return }
-                self.isEnergyRankingSampling = true
                 let sampledAt = Date()
+                if self.selectedSection == .apps {
+                    if appsVisibleSince == nil {
+                        appsVisibleSince = sampledAt
+                        // Let the panel finish its page transition before the
+                        // first process-wide scan starts.
+                        try? await Task.sleep(nanoseconds: 2_000_000_000)
+                        continue
+                    }
+                } else {
+                    appsVisibleSince = nil
+                }
+                // Enumerating every running process is the most expensive
+                // monitor in the app. Do not run it during launch or while the
+                // user is opening the overview. Once the App page has primed
+                // a baseline, retain a low-duty background sample.
+                if !EnergySamplingPolicy.shouldSample(
+                    lastSampleAt: lastSampleAt,
+                    selectedSection: self.selectedSection,
+                    now: sampledAt
+                ) {
+                    let checkInterval: UInt64 = lastSampleAt == nil || self.selectedSection == .apps
+                        ? 5_000_000_000
+                        : 30_000_000_000
+                    try? await Task.sleep(nanoseconds: checkInterval)
+                    continue
+                }
+                self.isEnergyRankingSampling = true
                 let ranking = await self.energyMonitor.sample()
                 self.appEnergyRanking = ranking
                 if await self.energyHistoryArchive.record(appUsages: ranking, at: sampledAt) {
@@ -145,7 +186,14 @@ final class BatteryStore: ObservableObject {
                     self.appEnergyHistory.removeAll { $0.timestamp < cutoff }
                 }
                 self.isEnergyRankingSampling = false
-                try? await Task.sleep(nanoseconds: 5_000_000_000)
+                lastSampleAt = sampledAt
+                // Process-wide energy sampling is substantially more expensive
+                // than reading the battery registry. Keep it responsive while
+                // the App page is visible and use a low-duty cadence elsewhere.
+                let checkInterval: UInt64 = self.selectedSection == .apps
+                    ? 10_000_000_000
+                    : 30_000_000_000
+                try? await Task.sleep(nanoseconds: checkInterval)
             }
         }
 
@@ -167,6 +215,7 @@ final class BatteryStore: ObservableObject {
         loadSchedules()
         loadScheduleLogs()
         observeWorkspacePowerEvents()
+        observePowerSourceChanges()
         scheduleTask = Task { @MainActor [weak self] in
             while !Task.isCancelled {
                 await self?.evaluateSchedules(at: Date())
@@ -182,7 +231,6 @@ final class BatteryStore: ObservableObject {
         let legacyDomain = defaults.persistentDomain(forName: "com.batteryharbor.app") ?? [:]
         let safeKeys = [
             "chargeLimit",
-            "automaticallyDischarges",
             "menuBarDisplayMode",
             "interfaceLanguage",
             "highTemperatureProtectionEnabled",
@@ -212,6 +260,10 @@ final class BatteryStore: ObservableObject {
         energySamplingTask?.cancel()
         historyLoadTask?.cancel()
         scheduleTask?.cancel()
+        powerTransitionRefreshTask?.cancel()
+        if let powerSourceNotificationToken {
+            notify_cancel(powerSourceNotificationToken)
+        }
     }
 
     var menuBarTitle: String {
@@ -225,6 +277,39 @@ final class BatteryStore: ObservableObject {
         case .power: return power
         case .both: return "\(percentage)  \(power)"
         }
+    }
+
+    var chargingPathStatus: ChargingPathStatus {
+        ChargingStateAnalyzer.status(
+            snapshot: snapshot,
+            targetLimit: Int(chargeLimit.rounded()),
+            chargingAllowed: knownChargingEnabled,
+            forceDischargeEnabled: knownForceDischargeEnabled,
+            isManuallyPaused: isChargingPaused,
+            isTemporaryFullChargeActive: isTemporaryFullChargeActive,
+            isTemperatureProtectionActive: isHighTemperatureProtectionActive,
+            isSystemSleeping: isSystemSleeping,
+            isControlAvailable: controlState.isAvailable
+        )
+    }
+
+    var menuBarBatterySymbol: String {
+        chargingPathStatus.batteryFlow.menuBarBatterySymbol(
+            levelSymbol: snapshot.nativeBatteryLevelSymbol
+        )
+    }
+
+    var menuBarAccessorySymbol: String? {
+        chargingPathStatus.batteryFlow.menuBarAccessorySymbol
+    }
+
+    var menuBarAccessibilityLabel: String {
+        guard snapshot.isPresent else { return L10n.text("未检测到电池") }
+        return L10n.format(
+            "%lld%%，%@",
+            snapshot.percentage,
+            chargingPathStatus.batteryFlow.displayName
+        )
     }
 
     var controlUnavailableReason: String? {
@@ -268,9 +353,13 @@ final class BatteryStore: ObservableObject {
     }
 
     func refresh() {
-        snapshot = reader.read()
-        if let watts = snapshot.powerWatts {
-            let sample = PowerSample(timestamp: snapshot.timestamp, watts: watts)
+        apply(snapshot: reader.read())
+    }
+
+    private func apply(snapshot latestSnapshot: BatterySnapshot) {
+        snapshot = latestSnapshot
+        if let watts = latestSnapshot.powerWatts {
+            let sample = PowerSample(timestamp: latestSnapshot.timestamp, watts: watts)
             samples.append(sample)
             if samples.count > maximumSamples {
                 samples.removeFirst(samples.count - maximumSamples)
@@ -279,7 +368,7 @@ final class BatteryStore: ObservableObject {
                 await energyHistoryArchive.record(power: sample)
             }
         }
-        evaluateMaintenancePolicy(at: snapshot.timestamp)
+        evaluateMaintenancePolicy(at: latestSnapshot.timestamp)
     }
 
     func refreshHelperStatus(probeWhenEnabled: Bool = false) {
@@ -539,7 +628,6 @@ final class BatteryStore: ObservableObject {
             helperStatus: helperRegistrationStatus,
             helperProbe: helperProbe,
             chargeLimit: Int(chargeLimit.rounded()),
-            automaticallyDischarges: automaticallyDischarges,
             highTemperatureProtectionEnabled: highTemperatureProtectionEnabled,
             highTemperatureThreshold: highTemperatureThreshold,
             sleepProtectionEnabled: sleepChargingProtectionEnabled,
@@ -702,6 +790,34 @@ final class BatteryStore: ObservableObject {
             .store(in: &workspaceCancellables)
     }
 
+    private func observePowerSourceChanges() {
+        var token: Int32 = 0
+        guard notify_register_dispatch(
+            kIOPSNotifyPowerSource,
+            &token,
+            DispatchQueue.main,
+            { [weak self] _ in
+                Task { @MainActor in self?.refreshPowerTransition() }
+            }
+        ) == NOTIFY_STATUS_OK else { return }
+        powerSourceNotificationToken = token
+    }
+
+    private func refreshPowerTransition() {
+        powerTransitionRefreshTask?.cancel()
+        refresh()
+        powerTransitionRefreshTask = Task { @MainActor [weak self] in
+            // Adapter negotiation telemetry arrives in stages. Temporarily
+            // sample faster after an actual power-source event, then return to
+            // the regular low-duty two-second cadence.
+            for _ in 0..<8 {
+                try? await Task.sleep(nanoseconds: 500_000_000)
+                guard let self, !Task.isCancelled else { return }
+                self.refresh()
+            }
+        }
+    }
+
     private func handleSystemWillSleep() {
         isSystemSleeping = true
         guard sleepChargingProtectionEnabled, controlState.isAvailable else { return }
@@ -806,7 +922,6 @@ final class BatteryStore: ObservableObject {
             upperLimit: Int(chargeLimit.rounded()),
             lowerLimitDelta: 3,
             isPaused: isChargingPaused,
-            automaticallyDischarges: automaticallyDischarges,
             temporaryFullChargeUntil: temporaryFullChargeUntil,
             now: date
         )
@@ -927,6 +1042,20 @@ final class BatteryStore: ObservableObject {
             knownChargingEnabled = true
             knownForceDischargeEnabled = false
         }
+    }
+}
+
+enum EnergySamplingPolicy {
+    static func shouldSample(
+        lastSampleAt: Date?,
+        selectedSection: DashboardSection,
+        now: Date
+    ) -> Bool {
+        guard let lastSampleAt else {
+            return selectedSection == .apps
+        }
+        let minimumInterval: TimeInterval = selectedSection == .apps ? 30 : 600
+        return now.timeIntervalSince(lastSampleAt) >= minimumInterval
     }
 }
 

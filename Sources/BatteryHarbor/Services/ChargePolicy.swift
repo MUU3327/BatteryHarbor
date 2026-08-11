@@ -8,7 +8,6 @@ struct ChargePolicyInput: Equatable, Sendable {
     let upperLimit: Int
     let lowerLimitDelta: Int
     let isPaused: Bool
-    let automaticallyDischarges: Bool
     let temporaryFullChargeUntil: Date?
     let now: Date
 }
@@ -36,13 +35,8 @@ struct ChargePolicy {
         let upperLimit = min(max(input.upperLimit, 50), 100)
         let lowerLimit = max(5, upperLimit - min(max(input.lowerLimitDelta, 1), 20))
 
-        if input.automaticallyDischarges, input.percentage > upperLimit {
-            var actions: [ChargeHardwareAction] = []
-            if input.isChargingEnabled != false { actions.append(.disableCharging) }
-            if input.isForceDischargeEnabled != true { actions.append(.enableForceDischarge) }
-            return actions
-        }
-
+        // Force discharge remains available to the explicit calibration
+        // workflow, but normal charge-limit maintenance never enables it.
         if input.isForceDischargeEnabled == true {
             return [.disableForceDischarge]
         }

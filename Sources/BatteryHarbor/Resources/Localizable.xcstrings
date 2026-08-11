@@ -4,6 +4,67 @@
     "" : {
 
     },
+    "充电上限目标" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charge Limit Target" } } } },
+    "充电控制" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Control" } } } },
+    "功率分配" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Power Allocation" } } } },
+    "当前电量" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Current Level" } } } },
+    "使用电池" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "On Battery" } } } },
+    "已接电源" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Connected to Power" } } } },
+    "更多充电详情" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "More Charging Details" } } } },
+    "临时目标" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Temporary Target" } } } },
+    "临时调整到 100%" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Temporarily charge to 100%" } } } },
+    "停止向电池充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Stop charging the battery" } } } },
+    "恢复常规充电上限" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Restore the regular charge limit" } } } },
+    "目标" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Target" } } } },
+    "重新允许电池充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Allow battery charging again" } } } },
+    "按最近 15 秒的公开进程能耗数据估算" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Estimated from public process energy data over the latest 15-second interval" } } } },
+    "每 2 秒读取 · 最近 6 分钟" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Read every 2 seconds · Last 6 minutes" } } } },
+    "%lld%%，%@" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "%lld%%, %@" } } } },
+    "未连接" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Disconnected" } } } },
+    "已连接" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Connected" } } } },
+    "不适用" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "N/A" } } } },
+    "等待参数" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Waiting" } } } },
+    "已建立" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Ready" } } } },
+    "未知" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Unknown" } } } },
+    "适配器供电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Adapter" } } } },
+    "正在切换" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Switching" } } } },
+    "手动暂停" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Manual Pause" } } } },
+    "高温保护" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Thermal Protection" } } } },
+    "睡眠保护" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Protection" } } } },
+    "达到上限" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "At Limit" } } } },
+    "回差保持" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Hysteresis Hold" } } } },
+    "自动放电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto Discharge" } } } },
+    "系统暂缓" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "System Hold" } } } },
+    "外接电源下放电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Discharging on Adapter" } } } },
+    "当前无法读取电池与充电链路状态。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Battery and charging-path status is unavailable." } } } },
+    "充电状态不可用" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Status Unavailable" } } } },
+    "当前由电池供电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Running on Battery" } } } },
+    "未检测到外接电源，电池正在为系统供电。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "No external power source is detected. The battery is powering the system." } } } },
+    "充电已手动暂停" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Paused Manually" } } } },
+    "适配器继续为系统供电，电池暂不接受充电。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter continues to power the system while the battery is not charging." } } } },
+    "高温保护已暂停充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Thermal Protection Paused Charging" } } } },
+    "电池温度达到保护条件，降温后将按当前上限恢复。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Battery temperature reached the protection threshold. Charging will resume at the current limit after it cools." } } } },
+    "睡眠保护已暂停充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Sleep Protection Paused Charging" } } } },
+    "Mac 唤醒后将重新评估当前充电上限。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The current charge limit will be evaluated again when the Mac wakes." } } } },
+    "适配器正为系统供电，电池保持在 %lld%% 上限附近。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter is powering the system while the battery stays near the %lld%% limit." } } } },
+    "正在避免频繁启停" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Preventing Rapid Charge Cycling" } } } },
+    "充电将在电量降至 %lld%% 时恢复。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging will resume when the battery reaches %lld%%." } } } },
+    "正在自动放电至上限" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Auto-Discharging to the Limit" } } } },
+    "适配器仍连接，电池当前输出 %@ W。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter is connected while the battery is outputting %@ W." } } } },
+    "正在临时充满" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Topping Up Temporarily" } } } },
+    "当前充入电池 %@ W，完成后恢复常规上限。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The battery is receiving %@ W. The regular limit will return when this finishes." } } } },
+    "当前充电功率偏低" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Power Is Currently Low" } } } },
+    "适配器额定 %lld W，当前充入电池 %@ W；可能由线材、温度、系统负载或 macOS 策略限制。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter is rated for %lld W and the battery is receiving %@ W. The cable, temperature, system load, or macOS policy may be limiting it." } } } },
+    "正在正常充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Normally" } } } },
+    "当前充入电池 %@ W；接近目标电量时功率下降属于正常现象。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The battery is receiving %@ W. Power normally tapers near the target level." } } } },
+    "正在识别外接电源" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Identifying External Power" } } } },
+    "已连接适配器，正在等待 macOS 发布供电参数。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter is connected. Waiting for macOS to publish power parameters." } } } },
+    "macOS 暂缓充电" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Charging Held by macOS" } } } },
+    "当前未进行硬件控制" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Hardware Control Is Not Active" } } } },
+    "适配器正在为系统供电，电池当前未接受充电；高电量或系统电池管理可能暂缓补电。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The adapter is powering the system, but the battery is not accepting charge. A high battery level or macOS battery management may be holding it." } } } },
+    "外接电源尚未完全接管系统" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "External Power Has Not Fully Taken Over" } } } },
+    "电池仍在输出 %@ W，请检查适配器、线材或供电协商状态。" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "The battery is still outputting %@ W. Check the adapter, cable, or power negotiation." } } } },
+    "协商" : { "localizations" : { "en" : { "stringUnit" : { "state" : "translated", "value" : "Negotiation" } } } },
     "%@ %lld%%" : {
       "localizations" : {
         "en" : {
@@ -3265,16 +3326,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Negative: battery output"
-          }
-        }
-      }
-    },
-    "超出上限时自动放电" : {
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Automatically Discharge Above Limit"
           }
         }
       }

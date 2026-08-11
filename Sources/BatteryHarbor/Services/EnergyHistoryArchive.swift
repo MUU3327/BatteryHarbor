@@ -32,7 +32,7 @@ actor EnergyHistoryArchive {
 
     func record(power sample: PowerSample) {
         loadIfNeeded()
-        guard lastPowerRecordAt.map({ sample.timestamp.timeIntervalSince($0) >= 10 }) ?? true else { return }
+        guard lastPowerRecordAt.map({ sample.timestamp.timeIntervalSince($0) >= 30 }) ?? true else { return }
         lastPowerRecordAt = sample.timestamp
         snapshot.powerSamples.append(sample)
         prune(relativeTo: sample.timestamp)

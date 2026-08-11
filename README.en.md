@@ -13,17 +13,17 @@ Battery Harbor is a clean-room, native macOS menu bar utility for battery care. 
 | Battery and power monitoring | Complete | Charge, temperature, health, cycle count, voltage, current, and live power |
 | Menu bar and dashboard | Complete | Simplified Chinese/English, native icons, consistent glass styling, and horizontal tab transitions |
 | App energy ranking | Complete | Groups helper processes under their host app; live, 1-hour, and 24-hour views |
-| Charge policy | Complete | Charge limit, pause, temporary full charge, 3% hysteresis, and optional discharge above the limit |
+| Charge policy | Complete | Charge limit, pause, temporary full charge, and 3% hysteresis; normal limit maintenance never forces discharge |
 | Root Helper | Tested on one Apple Silicon Mac | XPC v3 handshake, signature checks, allowlist, read-back verification, rollback, and restoration self-test |
 | Schedules and Shortcuts | Complete | Weekday/time schedules, execution log, and four App Intents |
 | Automatic protection | Complete | High-temperature pause, sleep pause, wake recovery, and background enforcement |
-| Automated tests | 32 unit tests passing | CI builds and tests without installing the Helper or writing to SMC |
-| Public release | Local `0.1.0-alpha.2` candidate built | MIT licensed; the current community DMG passed static signature verification, and the previous candidate passed clean-account testing with no Apple ID or maintainer certificate; no Developer ID notarized build is planned yet |
+| Automated tests | 39 unit tests passing | CI builds and tests without installing the Helper or writing to SMC |
+| Public release | `0.1.0-alpha.2` community technical preview | MIT licensed; the self-signed arm64 DMG passed static signature verification and clean-account testing with no Apple ID or maintainer certificate; no Developer ID notarized build is planned yet |
 
 ## Features
 
 - Drag to set a charge limit and pause automatically at the limit
-- Pause/resume charging, temporarily charge to 100%, and optionally discharge above the limit
+- Pause/resume charging and temporarily charge to 100%; normal charge-limit maintenance never forces discharge
 - Live power split between adapter input, system load, and battery flow
 - Charge/discharge history sampled every two seconds
 - Live and local 24-hour per-app energy ranking
